@@ -1,0 +1,35 @@
+{
+    "common": {
+        "name":                     "vis-players-widgets",
+        "version": "0.0.1",
+        "title":                    "ioBroker Visualisation - players-widgets Widgets",
+        "desc": {
+            "en":                   "players-widgets Widgets for ioBroker.vis",
+            "de":                   "players-widgets Widgets für ioBroker.vis",
+            "ru":                   "players-widgets Widgets для ioBroker.vis"
+        },
+        "platform":                 "Javascript/Node.js",
+        "icon":                     "players-widgets.png",
+        "enabled":                  true,
+        "mode":                     "once",
+        "extIcon":                  "https://github.com/ioBroker/ioBroker.js-controller/raw/master/adapter/example/admin/example.png",
+        "keywords":                 ["players-widgets", "vis", "GUI", "graphical", "scada"],
+        "readme":                   "https://github.com/ioBroker/ioBroker.vis-players-widgets/blob/master/README.md",
+        "authors": [
+            "instalator <vvvalt@mail.ru>"
+        ],
+        "localLink":                "%web_protocol%://%ip%:%web_port%/vis/edit.html",
+        "license":                  "MIT",
+        "dependencies":             ["vis"],
+        "onlyWWW":                  true,
+        "noConfig":                 true,
+        "singleton":                true,
+        "type":                     "vis",
+        "restartAdapters":          ["vis"]
+    },
+    "native": {
+        "dependencies":          []
+    },
+    "instanceObjects": [
+    ]
+}
