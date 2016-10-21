@@ -2,19 +2,19 @@
     "common": {
         "name":                     "vis-players-widgets",
         "version": "0.0.1",
-        "title":                    "ioBroker Visualisation - players-widgets Widgets",
+        "title":                    "ioBroker Visualisation - MediaPlayers Widgets",
         "desc": {
-            "en":                   "players-widgets Widgets for ioBroker.vis",
-            "de":                   "players-widgets Widgets für ioBroker.vis",
-            "ru":                   "players-widgets Widgets для ioBroker.vis"
+            "en":                   "MediaPlayers Widgets for ioBroker.vis",
+            "de":                   "MediaPlayers Widgets für ioBroker.vis",
+            "ru":                   "MediaPlayers Widgets для ioBroker.vis"
         },
         "platform":                 "Javascript/Node.js",
         "icon":                     "players-widgets.png",
         "enabled":                  true,
         "mode":                     "once",
-        "extIcon":                  "https://github.com/ioBroker/ioBroker.js-controller/raw/master/adapter/example/admin/example.png",
+        "extIcon":                  "https://github.com/instalator/ioBroker.js-controller/raw/master/adapter/example/admin/example.png",
         "keywords":                 ["players-widgets", "vis", "GUI", "graphical", "scada"],
-        "readme":                   "https://github.com/ioBroker/ioBroker.vis-players-widgets/blob/master/README.md",
+        "readme":                   "https://github.com/instalator/ioBroker.vis-players-widgets/blob/master/README.md",
         "authors": [
             "instalator <vvvalt@mail.ru>"
         ],
