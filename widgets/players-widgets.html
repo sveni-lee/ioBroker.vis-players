@@ -1,14 +1,12 @@
 <!--
-    ioBroker.vis players-widgets Widget-Set
+    ioBroker.vis players Widget-Set
 
     version: "0.0.1"
 
     Copyright 10.2015-2016 instalator<vvvalt@mail.ru>
 -->
-<!-- here you can include so many css as you want -->
-<link rel="stylesheet" href="widgets/players-widgets/css/style.css" />
-<!-- here you can include so many js-files as you want -->
-<script type="text/javascript" src="widgets/players-widgets/js/players-widgets.js"></script>
+<link rel="stylesheet" href="widgets/players/css/style.css" />
+<script type="text/javascript" src="widgets/players/js/players.js"></script>
 
 <!-- the full description of format in data-vis-attrs can be found here: 
     https://github.com/ioBroker/ioBroker.vis/blob/master/www/js/visEditInspect.js#L39 
@@ -100,17 +98,69 @@
     You can do "if" conditions and "for" cycles.
 
 -->
-<script id="tplPlayers-widgetsShowInstance"
+<!--iobroker visdebug vis-players-->
+
+<script id="tplWinampPlayer"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img src="widgets/players/img/test.png"></img>'
+        data-vis-attrs="oid_alias/id/changeOid2;oid_car_state_hijack/id;oid_car_state_arm/id;"
+        data-vis-attrs0="group.car_control;oid_control_hijack/id;oid_control_arm/id;oid_control_ign/id;oid_control_poke/id;"
+        data-vis-set="players"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="Winamp Player">
+    <div class="vis-widget <%== this.data.attr('class') %>" style="width:317px; height:73px" id="<%= this.data.attr('wid') %>" >
+
+    <div style="display: inline; position: absolute; overflow: hidden; background-color: transparent; border-style: none; margin: 0px; padding: 0px; width: 354px; height: 161px; left: 386px; top: 87px; z-index: 2;">
+			<div style="height: 17px; cursor: move;">
+				<img src="waBoxTitleRight.gif" style="float: right;">
+				<img src="waBoxTitleLeft.gif" style="float: left;">
+				<div style="margin: 0px 10px; height: 17px; text-align: center; position: relative;">
+					<img src="waBoxBg.gif" style="position: absolute; top: 0px; left: 0px; width: 100%; z-index: -1; height: 17px;">
+					<img src="waConsoleTitle.gif" style="z-index: 1;">
+				</div>
+			</div>
+			<div style="clear: both; border-width: 0px; border-style: none; border-color: initial; background-color: transparent; overflow: hidden; width: 354px; height: 144px;">
+				<div id="console">
+					<img src="console.gif" usemap="#consoleMap" width="354" height="144" border="0">
+					<img src="waLightOn.gif" border="0" style="position: absolute;top: 65px;left: 337px;display: none;">
+					<img src="waLightOn.gif" border="0" style="position: absolute; top: 42px; left: 337px; display: none;">
+					<div style="position: absolute; top: 119px; left: 201px;">
+						<img src="vol_slider.png" border="0px" style="position: absolute; top: 0px; left: 0px;">
+						<div style="position: absolute; top: 10px; left: 34px; font-size: 0px; width: 0px; height: 0px; cursor: pointer;">
+							<img src="vol_handle.gif" border="0" style="position: absolute; top: 0px; left: 0px;">
+						</div>
+					</div>
+					<div style="position: absolute; top: 88px; left: 8px;">
+						<img src="seek_slider.gif" border="0px" style="position: absolute; top: 0px; left: 0px;">
+						<div style="position: absolute; top: 5px; left: 0px; font-size: 0px; width: 0px; height: 0px; cursor: pointer;">
+							<img src="seek_handle.gif" border="0" style="position: absolute; top: 0px; left: 0px;">
+						</div>
+					</div>
+					<div style="position: absolute; top: 34px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;">Artist: DJ MIKE LLAMA</div>
+					<div style="position: absolute; top: 50px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;">Title: LLAMA WHIPPIN' INTRO (0:05)</div>
+					<div style="position: absolute; top: 66px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;">Album: BEATS OF BURDON</div>
+					<div style="position: absolute; top: 34px; left: 254px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial;">kbps: 56</div>
+				</div>
+			</div>
+		</div>
+       <% vis.binds.players.createWidgetWinampPlayer(this.data.wid, this.view, this.data, this.style);%>
+	</div>
+</script>
+
+
+<!--<script id="tplPlayers-widgetsShowInstance"
         type="text/ejs"
         class="vis-tpl"
         data-vis-prev='<div id="prev_tplMysetShowInstance" style="position: relative; text-align: initial;padding: 4px "><div class="vis-widget_prev " style="width: 280px; height: 159px;" > <div class="myset-class vis-widget-prev-body " style="padding:2px"> OID: hm-rpc.0.EEQ0006629.1.STATE<br> OID value: true<br> Color: <span style="color: rgb(128, 0, 0);">#800000</span><br> htmlText: <textarea readonly="" style="width:100%">asda</textarea></div>'
         data-vis-attrs="oid/id;myColor/color;htmlText/text;"
-        data-vis-attrs0="group.extraPlayers-widgets;extraAttr"
-        data-vis-set="players-widgets"
+        data-vis-attrs0="group.extraPlayers;extraAttr"
+        data-vis-set="players"
         data-vis-type="helper"
         data-vis-name="Show instance">
     <div class="vis-widget <%== this.data.attr('class') %>" style="width:230px; height:210px;" id="<%= this.data.attr('wid') %>" >
-        <div class="players-widgets-class vis-widget-body <%== this.data.attr('class') %>" style="padding:2px" >
+        <div class="players-class vis-widget-body <%== this.data.attr('class') %>" style="padding:2px" >
             OID: <%= this.data.attr('oid') %><br>
             OID value: <%== vis.states[this.data.attr('oid') + '.val'] %><br>
 			Color: <span style="color: <%= this.data.attr('myColor') %>"><%= this.data.attr('myColor') %></span><br>
@@ -126,13 +176,11 @@
         class="vis-tpl"
         data-vis-prev='<div id="prev_tplPlayers-widgetsHelper" style="position: relative; text-align: initial;padding: 4px "><div class="vis-widget_prev " style="width: 280px; height: 159px;" > <div class="myset-class vis-widget-prev-body " style="padding:2px"> OID: hm-rpc.0.EEQ0006629.1.STATE<br> OID value: true<br> Color: <span style="color: rgb(128, 0, 0);">#800000</span><br> htmlText: <textarea readonly="" style="width:100%">asda</textarea></div>'
         data-vis-attrs="oid/id;myColor/color;htmlText/text;"
-        data-vis-attrs0="group.extraPlayers-widgets;extraAttr"
-        data-vis-set="players-widgets"
+        data-vis-attrs0="group.extraPlayers;extraAttr"
+        data-vis-set="players"
         data-vis-type="helper"
         data-vis-name="Helper">
     <div class="vis-widget <%== this.data.attr('class') %>" style="overflow:visible; width: 230px; height: 210px" id="<%= this.data.attr('wid') %>"><%
-        vis.binds.players-widgets.createWidget(this.data.wid, this.view, this.data, this.style);
+        vis.binds.players.createWidget(this.data.wid, this.view, this.data, this.style);
     %></div>
-</script>
-
-
+</script>-->

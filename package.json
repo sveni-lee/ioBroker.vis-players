@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.vis-players-widgets",
+  "name": "iobroker.vis-players",
   "description": "MediaPlayers Widgets for ioBroker.vis",
   "version": "0.0.1",
   "author": {
@@ -9,15 +9,15 @@
   "contributors": [
     "instalator <vvvalt@mail.ru>"
   ],
-  "homepage": "https://github.com/instalator/ioBroker.vis-players-widgets",
+  "homepage": "https://github.com/instalator/ioBroker.vis-players",
   "repository": {
     "type": "git",
-    "url": "https://github.com/instalator/ioBroker.vis-players-widgets"
+    "url": "https://github.com/instalator/ioBroker.vis-players"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/instalator/ioBroker.vis-players-widgets/blob/master/LICENSE"
+      "url": "https://github.com/instalator/ioBroker.vis-players/blob/master/LICENSE"
     }
   ],
   "keywords": [
@@ -37,9 +37,9 @@
     "grunt-exec": "^0.4.6"
   },
   "bugs": {
-    "url": "https://github.com/instalator/ioBroker.vis-players-widgets/issues"
+    "url": "https://github.com/instalator/ioBroker.vis-players/issues"
   },
-  "main": "widgets/players-widgets.html",
+  "main": "widgets/players.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

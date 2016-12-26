@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     if (process.argv[2] == 'rename') {
 		console.log('Try to rename to "' + newname + '"');
         if (!newname) {
-            console.log('Please write the new players-widgets name, like: "grunt rename --name=mywidgetset" --author="Author Name"');
+            console.log('Please write the new players name, like: "grunt rename --name=mywidgetset" --author="Author Name"');
             process.exit();
         }
         if (newname.indexOf(' ') != -1) {
@@ -31,17 +31,17 @@ module.exports = function (grunt) {
             console.log('Name must be lower case.');
             process.exit();
         }
-        if (fs.existsSync(__dirname + '/admin/players-widgets.png')) {
-            fs.renameSync(__dirname + '/admin/players-widgets.png',              __dirname + '/admin/' + newname + '.png');
+        if (fs.existsSync(__dirname + '/admin/players.png')) {
+            fs.renameSync(__dirname + '/admin/players.png',              __dirname + '/admin/' + newname + '.png');
         }
-        if (fs.existsSync(__dirname + '/widgets/players-widgets.html')) {
-            fs.renameSync(__dirname + '/widgets/players-widgets.html',           __dirname + '/widgets/' + newname + '.html');
+        if (fs.existsSync(__dirname + '/widgets/players.html')) {
+            fs.renameSync(__dirname + '/widgets/players.html',           __dirname + '/widgets/' + newname + '.html');
         }
-        if (fs.existsSync(__dirname + '/widgets/players-widgets/js/players-widgets.js')) {
-            fs.renameSync(__dirname + '/widgets/players-widgets/js/players-widgets.js', __dirname + '/widgets/players-widgets/js/' + newname + '.js');
+        if (fs.existsSync(__dirname + '/widgets/players/js/players.js')) {
+            fs.renameSync(__dirname + '/widgets/players/js/players.js', __dirname + '/widgets/players/js/' + newname + '.js');
         }
-        if (fs.existsSync(__dirname + '/widgets/players-widgets')) {
-            fs.renameSync(__dirname + '/widgets/players-widgets',                __dirname + '/widgets/' + newname);
+        if (fs.existsSync(__dirname + '/widgets/players')) {
+            fs.renameSync(__dirname + '/widgets/players',                __dirname + '/widgets/' + newname);
         }
     }
 
@@ -91,12 +91,12 @@ module.exports = function (grunt) {
                 options: {
                     patterns: [
                         {
-                            match: /players-widgets/g,
+                            match: /players/g,
                             replacement: newname
                         },
                         {
-                            match: /Players-widgets/g,
-                            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'Players-widgets'
+                            match: /Players/g,
+                            replacement: newname ? (newname[0].toUpperCase() + newname.substring(1)) : 'Players'
                         },
                         {
                             match: /instalator/g,
