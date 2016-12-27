@@ -41,7 +41,8 @@ vis.binds.players = {
         oid_play: {val: undefined, selector: '.alias_value', blink: false, objName: 'alias'},
         oid_next: {val: undefined, selector: '', blink: false, objName: 'ctemp'},
         oid_prev: {val: undefined, selector: '', blink: false, objName: 'etemp'}
-    }
+    },
+
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
         var $div = $('#' + widgetID);
         // if nothing found => wait
@@ -52,6 +53,52 @@ vis.binds.players = {
         }
         function updateStates() {
             var states = JSON.parse(JSON.stringify(vis.binds.players.states));
+            $(function() {
+                var slider = $('#winamp-vol_slider'),
+                    tooltip = $('.tooltip');
+                tooltip.hide();
+                slider.slider({
+                    range: "min",
+                    min: 1,
+                    value: 35,
+                    start: function(event,ui) {
+                        tooltip.fadeIn('fast');
+                    },
+                    slide: function(event, ui) {
+                        var value = slider.slider('value'),
+                            volume = $('.volume');
+                        tooltip.css('left', value).text(ui.value);
+
+                    },
+                    stop: function(event,ui) {
+                        tooltip.fadeOut('fast');
+                    }
+                });
+
+            });
+            $(function() {
+                var slider = $('#winamp-seek_slider'),
+                    tooltip = $('.tooltip');
+                tooltip.hide();
+                slider.slider({
+                    range: "min",
+                    min: 1,
+                    value: 35,
+                    start: function(event,ui) {
+                        tooltip.fadeIn('fast');
+                    },
+                    slide: function(event, ui) {
+                        var value = slider.slider('value'),
+                            volume = $('.seek');
+                        tooltip.css('left', value).text(ui.value);
+
+                    },
+                    stop: function(event,ui) {
+                        tooltip.fadeOut('fast');
+                    }
+                });
+
+            });
 
         }
 
