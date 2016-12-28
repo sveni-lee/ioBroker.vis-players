@@ -38,9 +38,20 @@ vis.binds.players = {
         }
     },
     states: {
-        oid_play: {val: undefined, selector: '.alias_value', blink: false, objName: 'alias'},
-        oid_next: {val: undefined, selector: '', blink: false, objName: 'ctemp'},
-        oid_prev: {val: undefined, selector: '', blink: false, objName: 'etemp'}
+        oid_play:   {val: undefined, selector: '', blink: false, objName: 'play'},
+        oid_next:   {val: undefined, selector: '', blink: false, objName: 'next'},
+        oid_prev:   {val: undefined, selector: '', blink: false, objName: ''},
+        oid_stop:   {val: undefined, selector: '', blink: false, objName: ''},
+        oid_pause:  {val: undefined, selector: '', blink: false, objName: ''},
+        oid_seek:   {val: 0,         selector: '', blink: false, objName: ''},
+        oid_vol:    {val: 0,         selector: '', blink: false, objName: ''},
+        oid_mute:   {val: undefined, selector: '', blink: false, objName: ''},
+        oid_random: {val: undefined, selector: '', blink: false, objName: ''},
+        oid_repeat: {val: undefined, selector: '', blink: false, objName: ''},
+        oid_artist: {val: '', selector: '', blink: false, objName: ''},
+        oid_title:  {val: '', selector: '', blink: false, objName: ''},
+        oid_album:  {val: '', selector: '', blink: false, objName: ''},
+        oid_bitrate:{val: '', selector: '', blink: false, objName: ''}
     },
 
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
@@ -53,53 +64,61 @@ vis.binds.players = {
         }
         function updateStates() {
             var states = JSON.parse(JSON.stringify(vis.binds.players.states));
+            for (var s in states) {
+                if (data[s] && data[s] !== 'nothing_selected') { states[s].val = vis.states[data[s] + '.val']; }
+            }
+
+            $('.winamp-artist').text('Artist: ' + states.oid_artist.val);
+            $('.winamp-title').text('Title: ' + states.oid_title.val);
+            $('.winamp-album').text('Album: ' + states.oid_album.val);
+            $('.winamp-bitrate').text('kbps: ' + states.oid_bitrate.val);
+
+            if(states.oid_repeat.val > 0){
+                $('.winamp-repeat').css("display","block");
+            } else {
+                $('.winamp-repeat').css("display","none");
+            }
+            if(states.oid_random.val > 0){
+                $('.winamp-random').css("display","block");
+            } else {
+                $('.winamp-random').css("display","none");
+            }
+
             $(function() {
-                var slider = $('#winamp-vol_slider'),
-                    tooltip = $('.tooltip');
-                tooltip.hide();
+                var slider = $('#winamp-vol_slider');
                 slider.slider({
                     range: "min",
-                    min: 1,
-                    value: 35,
+                    min: 0,
+                    value: states.oid_vol.val,
                     start: function(event,ui) {
-                        tooltip.fadeIn('fast');
                     },
                     slide: function(event, ui) {
-                        var value = slider.slider('value'),
-                            volume = $('.volume');
-                        tooltip.css('left', value).text(ui.value);
-
+                        var value = slider.slider('value');
+                        vis.setValue(data.oid_vol, value);
                     },
                     stop: function(event,ui) {
-                        tooltip.fadeOut('fast');
+
                     }
                 });
 
             });
             $(function() {
-                var slider = $('#winamp-seek_slider'),
-                    tooltip = $('.tooltip');
-                tooltip.hide();
+                var slider = $('#winamp-seek_slider');
                 slider.slider({
                     range: "min",
-                    min: 1,
-                    value: 35,
+                    min: 0,
+                    value: states.oid_seek.val,
                     start: function(event,ui) {
-                        tooltip.fadeIn('fast');
+
                     },
                     slide: function(event, ui) {
-                        var value = slider.slider('value'),
-                            volume = $('.seek');
-                        tooltip.css('left', value).text(ui.value);
-
+                        var value = slider.slider('value');
+                        vis.setValue(data.oid_seek, value);
                     },
                     stop: function(event,ui) {
-                        tooltip.fadeOut('fast');
                     }
                 });
-
             });
-
         }
 
         //debugger;

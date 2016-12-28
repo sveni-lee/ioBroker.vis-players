@@ -80,7 +80,7 @@
     position: absolute; top: 17px; left: 0px;
 }
 .winamp-seek{
-    position: absolute; top: 105px; left: 8px;
+    position: absolute; top: 89px; left: 16px;
 }
 .winamp-seek_slider{
     position: absolute; top: 0px; left: 0px;
@@ -92,21 +92,15 @@
     position: absolute; top: 0px; left: 0px;
 }
 .winamp-artist{ position: absolute; top: 50px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
-.winamp-title { position: absolute; top: 64px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
+.winamp-title { position: absolute; top: 66px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
 .winamp-album { position: absolute; top: 82px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
-.winamp-bitrate { position: absolute; top: 50px; left: 254px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial;}
+.winamp-bitrate { position: absolute; top: 50px; left: 251px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial;}
 
 
 .btn focus{
     outline: -webkit-focus-ring-color auto 5px;
 }
 
-section {
-    width: 150px;
-    height: auto;
-    margin: 100px auto 0;
-    position: relative;
-}
 #winamp-vol_slider{
     border-width: 1px;
     border-style: solid;
@@ -122,31 +116,7 @@ section {
     left: 0px;
     top: 25px;
 }
-.tooltip {
-    position: absolute;
-    display: block;
-    top: 0px;
-    z-index: 9999;
-    width: 35px;
-    height: 20px;
-    color: #fff;
-    text-align: center;
-    font: 10pt Tahoma, Arial, sans-serif ;
-    border-radius: 3px;
-    border: 1px solid #333;
-    -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
-    box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
-    background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
-}
+
 #winamp-vol_slider .volume {
     content: "";
     display: inline-block;
@@ -187,13 +157,12 @@ section {
     border-radius: 25px;
 }
 
-
 #winamp-seek_slider{
     border-width: 1px;
     border-style: solid;
     border-color: #333 #333 #777 #333;
     border-radius: 25px;
-    width: 100px;
+    width: 245px;
     position: absolute;
     height: 1px;
     background-color: #8e8d8d;
@@ -207,7 +176,7 @@ section {
 #winamp-seek_slider .seek {
     content: "";
     display: inline-block;
-    width: 25px;
+    width: 34px;
     height: 25px;
     right: -5px;
     background: url('../img/winamp/volume.png') no-repeat 0 -50px;
@@ -220,7 +189,7 @@ section {
     width: 25px;
     height: 14px;
     cursor: pointer;
-    background: url('../img/winamp/vol_handle.gif') no-repeat 50% 50% !important;
+    background: url('../img/winamp/seek_handle.gif') no-repeat 50% 50% !important;
     font-weight: bold;
     color: #1C94C4;
     outline: none;
@@ -229,14 +198,14 @@ section {
     margin-left: -12px;
 }
 #winamp-seek_slider .ui-slider-range {
-    background: #ffffff; !* Старые браузеры *!
-    background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%); !* FF3.6+ *!
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea)); !* Chrome,Safari4+ *!
-    background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); !* Chrome10+,Safari5.1+ *!
-    background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); !* Opera 11.10+ *!
-    background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); !* IE10+ *!
-    background: linear-gradient(top,  #ffffff 0%,#eaeaea 100%); !* W3C *!
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); !* IE6-9 *!
+    background: #ffffff;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%);
+    background: linear-gradient(top,  #ffffff 0%,#eaeaea 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 );
     position: absolute;
     border: 0;
     top: 0;
