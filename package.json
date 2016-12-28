@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vis-players",
-  "description": "MediaPlayers Widgets for ioBroker.vis",
+  "description": "Media Players Widgets for ioBroker.vis",
   "version": "0.0.1",
   "author": {
     "name": "instalator",
@@ -23,7 +23,7 @@
   "keywords": [
     "ioBroker",
     "GUI",
-	"MediaPlayers Widgets"
+	"Media Players Widgets"
   ],
   "devDependencies": {
     "grunt": "^0.4.5",
