@@ -53,7 +53,7 @@ vis.binds.players = {
         oid_album:  {val: '', selector: '', blink: false, objName: ''},
         oid_bitrate:{val: '', selector: '', blink: false, objName: ''}
     },
-
+    
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
         var $div = $('#' + widgetID);
         // if nothing found => wait
@@ -62,12 +62,14 @@ vis.binds.players = {
                 vis.binds.players.createWidgetWinampPlayer(widgetID, view, data, style);
             }, 100);
         }
+
         function updateStates() {
             var states = JSON.parse(JSON.stringify(vis.binds.players.states));
             for (var s in states) {
-                if (data[s] && data[s] !== 'nothing_selected') { states[s].val = vis.states[data[s] + '.val']; }
+                if( states.hasOwnProperty(s)){
+                    if (data[s] && data[s] !== 'nothing_selected') { states[s].val = vis.states[data[s] + '.val']; }
+                }
             }
-
             $('.winamp-artist').text('Artist: ' + states.oid_artist.val);
             $('.winamp-title').text('Title: ' + states.oid_title.val);
             $('.winamp-album').text('Album: ' + states.oid_album.val);
@@ -120,6 +122,18 @@ vis.binds.players = {
                 });
             });
         }
+        $(".winamp-btn").on("click", function(e){
+            e.preventDefault();
+            if (e.target.id === 'mute'){
+                if (data.oid_mute.val === 0 || data.oid_mute.val === false){
+                    vis.setValue(data.oid_mute, false);
+                    updateStates();
+                } else {
+                    vis.setValue(data.oid_mute, true);
+                    updateStates();
+                }
+            }
+        });
 
         //debugger;
         // subscribe on updates of values
