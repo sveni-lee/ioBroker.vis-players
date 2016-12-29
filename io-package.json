@@ -1,7 +1,7 @@
 {
     "common": {
         "name":                     "vis-players",
-        "version": "0.0.1",
+        "version": "0.0.10",
         "title":                    "ioBroker Visualisation - Media players widgets",
         "desc": {
             "en":                   "Media Players Widgets for ioBroker.vis",

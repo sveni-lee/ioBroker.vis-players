@@ -38,24 +38,25 @@ vis.binds.players = {
         }
     },
     states: {
-        oid_play:   {val: undefined, selector: '', blink: false, objName: 'play'},
-        oid_next:   {val: undefined, selector: '', blink: false, objName: 'next'},
-        oid_prev:   {val: undefined, selector: '', blink: false, objName: ''},
-        oid_stop:   {val: undefined, selector: '', blink: false, objName: ''},
-        oid_pause:  {val: undefined, selector: '', blink: false, objName: ''},
-        oid_seek:   {val: 0,         selector: '', blink: false, objName: ''},
-        oid_vol:    {val: 0,         selector: '', blink: false, objName: ''},
-        oid_mute:   {val: undefined, selector: '', blink: false, objName: ''},
-        oid_random: {val: undefined, selector: '', blink: false, objName: ''},
-        oid_repeat: {val: undefined, selector: '', blink: false, objName: ''},
-        oid_artist: {val: '', selector: '', blink: false, objName: ''},
-        oid_title:  {val: '', selector: '', blink: false, objName: ''},
-        oid_album:  {val: '', selector: '', blink: false, objName: ''},
-        oid_bitrate:{val: '', selector: '', blink: false, objName: ''}
+        oid_play:    {val: undefined, selector: '', objName: 'play'},
+        oid_next:    {val: undefined, selector: '', objName: 'next'},
+        oid_prev:    {val: undefined, selector: '', objName: ''},
+        oid_stop:    {val: undefined, selector: '', objName: ''},
+        oid_pause:   {val: undefined, selector: '', objName: ''},
+        oid_seek:    {val: 0,         selector: '', objName: ''},
+        oid_vol:     {val: 0,         selector: '', objName: ''},
+        oid_mute:    {val: undefined, selector: '', objName: ''},
+        oid_shuffle: {val: undefined, selector: '', objName: ''},
+        oid_repeat:  {val: undefined, selector: '', objName: ''},
+        oid_artist:  {val: '',        selector: '', objName: ''},
+        oid_title:   {val: '',        selector: '', objName: ''},
+        oid_album:   {val: '',        selector: '', objName: ''},
+        oid_bitrate: {val: '',        selector: '', objName: ''}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
         var $div = $('#' + widgetID);
+        var states = {};
         // if nothing found => wait
         if (!$div.length) {
             return setTimeout(function () {
@@ -64,7 +65,7 @@ vis.binds.players = {
         }
 
         function updateStates() {
-            var states = JSON.parse(JSON.stringify(vis.binds.players.states));
+            states = JSON.parse(JSON.stringify(vis.binds.players.states));
             for (var s in states) {
                 if( states.hasOwnProperty(s)){
                     if (data[s] && data[s] !== 'nothing_selected') { states[s].val = vis.states[data[s] + '.val']; }
@@ -75,15 +76,15 @@ vis.binds.players = {
             $('.winamp-album').text('Album: ' + states.oid_album.val);
             $('.winamp-bitrate').text('kbps: ' + states.oid_bitrate.val);
 
-            if(states.oid_repeat.val > 0){
+            if(states.oid_repeat.val){
                 $('.winamp-repeat').css("display","block");
             } else {
                 $('.winamp-repeat').css("display","none");
             }
-            if(states.oid_random.val > 0){
-                $('.winamp-random').css("display","block");
+            if(states.oid_shuffle.val){
+                $('.winamp-shuffle').css("display","block");
             } else {
-                $('.winamp-random').css("display","none");
+                $('.winamp-shuffle').css("display","none");
             }
 
             $(function() {
@@ -123,18 +124,51 @@ vis.binds.players = {
             });
         }
         $(".winamp-btn").on("click", function(e){
-            e.preventDefault();
-            if (e.target.id === 'mute'){
-                if (data.oid_mute.val === 0 || data.oid_mute.val === false){
-                    vis.setValue(data.oid_mute, false);
-                    updateStates();
-                } else {
-                    vis.setValue(data.oid_mute, true);
-                    updateStates();
-                }
+            switch (e.target.id) {
+                case 'mute':
+                    Toggle('mute');
+                    break;
+                case 'play':
+                        vis.setValue(data.oid_play, true);
+                    break;
+                case 'next':
+                        vis.setValue(data.oid_next, true);
+                    break;
+                case 'prev':
+                        vis.setValue(data.oid_prev, true);
+                    break;
+                case 'stop':
+                        vis.setValue(data.oid_stop, true);
+                    break;
+                case 'pause':
+                        Toggle('pause');
+                    break;
+                case 'shuffle':
+                        Toggle('shuffle');
+                    break;
+                case 'repeat':
+                        Toggle('repeat');
+                    break;
+                case 'playlist':
+                       //vis.setValue(data.oid_next, true);
+                    break;
+                case 'library':
+                        //vis.setValue(data.oid_next, true);
+                    break;
+                default:
             }
         });
-
+        function Toggle(btn){
+            var oid = 'oid_' + btn;
+            var val = states[oid].val;
+            var state = data['oid_' + btn];
+            console.log('Press button - '+ btn +' / val='+val+' /state='+state);
+            if (val === 0 || val === '0' || val === false || val === 'false' || val === 'off'){
+                vis.setValue(state, true);
+            } else if (val === 1 || val === '1' || val === true || val === 'true' || val === 'on'){
+                vis.setValue(state, false);
+            }
+        }
         //debugger;
         // subscribe on updates of values
         for (var s in vis.binds.players.states) {

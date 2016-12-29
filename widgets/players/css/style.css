@@ -13,15 +13,10 @@
     height: 161px;
     z-index: 2;
 }
-.winamp-head{
-    height: 17px;
-}
-.winamp-head_r{
-    float: right;
-}
-.winamp-head_l{
-    float: left;
-}
+.winamp-head{ height: 17px;}
+.winamp-head_r{ float: right;}
+.winamp-head_l{ float: left;}
+
 .winamp-head_c{
     margin: 0px 10px;
     height: 17px;
@@ -56,7 +51,7 @@
     left: 337px;
     display: none;
 }
-.winamp-random{
+.winamp-shuffle{
     position: absolute;
     top: 82px;
     left: 337px;
@@ -95,11 +90,6 @@
 .winamp-title { position: absolute; top: 66px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
 .winamp-album { position: absolute; top: 82px; left: 23px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial; overflow: hidden; width: 274px;}
 .winamp-bitrate { position: absolute; top: 50px; left: 251px; color: rgb(255, 255, 255); font-size: 10px; height: 11px; font-family: Arial;}
-
-
-.btn focus{
-    outline: -webkit-focus-ring-color auto 5px;
-}
 
 #winamp-vol_slider{
     border-width: 1px;

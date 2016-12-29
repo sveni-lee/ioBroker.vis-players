@@ -9,5 +9,8 @@
 
 ## Changelog
 
+#### 0.0.10
+* (instalator) added widget winamp player
+
 #### 0.0.1
 * (instalator) initial (21.10.2016)
