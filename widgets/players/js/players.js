@@ -56,6 +56,8 @@ vis.binds.players = {
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
         var $div = $('#' + widgetID);
+        var vol_slider = $('#winamp-vol_slider');
+        var seek_slider = $('#winamp-seek_slider');
         var states = {};
         // if nothing found => wait
         if (!$div.length) {
@@ -63,7 +65,43 @@ vis.binds.players = {
                 vis.binds.players.createWidgetWinampPlayer(widgetID, view, data, style);
             }, 100);
         }
+        $(function() {
+            //var vol_slider = $('#winamp-vol_slider');
+            vol_slider.slider({
+                range: "min",
+                min: 0,
+                value: vis.states['data.oid_vol.val'],//states.oid_vol.val,
+                start: function(event,ui) {
+                },
+                slide: function(event, ui) {
+                    //console.log(ui);
+                    //var value = vol_slider.slider('value');
+                    vis.setValue(data.oid_vol, ui.value);
+                },
+                stop: function(event,ui) {
 
+                }
+            });
+
+        /*});
+        $(function() {*/
+           // var seek_slider = $('#winamp-seek_slider');
+            seek_slider.slider({
+                range: "min",
+                min: 0,
+                max: 100,
+                value: 0,//states.oid_seek.val,
+                start: function(event,ui) {
+
+                },
+                slide: function(event, ui) {
+                    //console.log(ui.value);
+                    vis.setValue(data.oid_seek, ui.value);
+                },
+                stop: function(event,ui) {
+                }
+            });
+        });
         function updateStates() {
             states = JSON.parse(JSON.stringify(vis.binds.players.states));
             for (var s in states) {
@@ -87,41 +125,9 @@ vis.binds.players = {
                 $('.winamp-shuffle').css("display","none");
             }
 
-            $(function() {
-                var slider = $('#winamp-vol_slider');
-                slider.slider({
-                    range: "min",
-                    min: 0,
-                    value: states.oid_vol.val,
-                    start: function(event,ui) {
-                    },
-                    slide: function(event, ui) {
-                        var value = slider.slider('value');
-                        vis.setValue(data.oid_vol, value);
-                    },
-                    stop: function(event,ui) {
+            vol_slider.slider( "value", states.oid_vol.val );
+            seek_slider.slider( "value", parseInt(states.oid_seek.val) );
 
-                    }
-                });
-
-            });
-            $(function() {
-                var slider = $('#winamp-seek_slider');
-                slider.slider({
-                    range: "min",
-                    min: 0,
-                    value: states.oid_seek.val,
-                    start: function(event,ui) {
-
-                    },
-                    slide: function(event, ui) {
-                        var value = slider.slider('value');
-                        vis.setValue(data.oid_seek, value);
-                    },
-                    stop: function(event,ui) {
-                    }
-                });
-            });
         }
         $(".winamp-btn").on("click", function(e){
             switch (e.target.id) {
