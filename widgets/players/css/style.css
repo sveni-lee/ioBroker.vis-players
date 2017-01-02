@@ -13,17 +13,17 @@
     height: 161px;
     z-index: 2;
 }
-.winamp-head{ height: 17px;}
-.winamp-head_r{ float: right;}
-.winamp-head_l{ float: left;}
+.winamp-head, .win-plst-head{ height: 17px;}
+.winamp-head_r, .win-plst-head_r{ float: right;}
+.winamp-head_l, .win-plst-head_l{ float: left;}
 
-.winamp-head_c{
+.winamp-head_c, .win-plst-head_c{
     margin: 0px 10px;
     height: 17px;
     text-align: center;
     position: relative;
 }
-.winamp-head_c-bg{
+.winamp-head_c-bg, .win-plst-head_c-bg{
     position: absolute;
     top: 0px;
     left: 0px;
@@ -31,7 +31,7 @@
     z-index: 1;
     height: 17px;
 }
-.winamp-head_c-img{
+.winamp-head_c-img, .win-plst-head_c-img{
     position: inherit;
     z-index: 2;
 }
@@ -44,6 +44,17 @@
     overflow: hidden;
     width: 354px;
     height: 144px;
+}
+.win-plst-body{
+    /*clear: both;*/
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    background-color: rgb(28, 61, 125);
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: 70%;
 }
 .winamp-repeat{
     position: absolute;
@@ -176,7 +187,7 @@
 #winamp-seek_slider .ui-slider-handle {
     position: absolute;
     z-index: 2;
-    width: 25px;
+    width: 34px;
     height: 14px;
     cursor: pointer;
     background: url('../img/winamp/seek_handle.gif') no-repeat 50% 50% !important;
@@ -202,3 +213,57 @@
     height: 100%;
     border-radius: 25px;
 }
+
+.win-plst-footer{
+    height: 24px;
+    background-color: transparent;
+}
+.win-plst-footer-resize{
+    float: right;
+    cursor: se-resize;
+}
+.win-plst-footer-l{
+    float: left;
+}
+.win-plst-footer-b{
+    margin: 0px 10px;
+    height: 24px;
+    position: relative;
+}
+.win-plst-footer-bg{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 24px;
+}
+.MLfooter{
+    position: relative;
+}
+.Mlfooter{
+}
+
+#winamp-playlist {
+    overflow-x: hidden;
+}
+#winamp-playlist ul{
+    list-style-type: none;
+    vertical-align: top;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+    font-weight: normal;
+    cursor: pointer;
+    margin-left: 5px;
+    padding-left: 5px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+#winamp-playlist li:hover, #winamp-playlist li:nth-child(even):hover {     background-color: #6788C9; color:#BBD2FF; }
+#winamp-playlist li.active{
+    background-color:#00bd9b;
+    color:#fff;
+}
+
+/*TR.plChoiceSelected { background-color:#6788C9;  cursor:pointer; }*/
+/*TD.plChoicePlaying { -moz-user-select: none; vertical-align:top; font-family: Verdana, Arial, sans-serif; font-size: 10px; color: #BBD2FF; font-weight: normal; }*/
