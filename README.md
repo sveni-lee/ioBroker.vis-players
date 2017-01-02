@@ -9,6 +9,9 @@
 
 ## Changelog
 
+#### 0.0.11
+* (instalator) added widget winamp playlist
+
 #### 0.0.10
 * (instalator) added widget winamp player
 
