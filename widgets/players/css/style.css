@@ -220,7 +220,7 @@
 }
 .win-plst-footer-resize{
     float: right;
-    cursor: se-resize;
+    /*cursor: se-resize;*/
 }
 .win-plst-footer-l{
     float: left;
@@ -242,7 +242,13 @@
 }
 .Mlfooter{
 }
-
+.winamp-plst-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 10;
+}
 .winamp-playlist {
     overflow-x: hidden;
 }

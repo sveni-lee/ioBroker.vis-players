@@ -205,7 +205,8 @@ vis.binds.players = {
                     toggle('repeat');
                     break;
                 case 'playlist':
-                    //vis.setValue(data.oid_next, true);
+                    $('.win-plst-head').parent().slideToggle( "slow", function() {
+                    });
                     break;
                 case 'library':
                     //vis.setValue(data.oid_next, true);
@@ -295,11 +296,10 @@ vis.binds.players = {
              });
         }
         
-        $('.winamp-btn').on('click', function(e){
-
+        $('.winamp-plst-close').on('click', function (e){
+            $div.slideToggle('slow', function() {});
         });
 
-        //debugger;
         // subscribe on updates of values
         if (data.oid_playlist) {
             vis.states.bind(data.oid_playlist + '.val', function (e, newVal, oldVal) {
