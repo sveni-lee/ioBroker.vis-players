@@ -29,12 +29,14 @@ if (vis.editMode) {
         "oid_vol":          {"en": "Volume",        "de": "Lautsärke",  "ru": "Громкость"},
         "oid_mute":         {"en": "Mute",          "de": "Mute",       "ru": "Mute"},
         "oid_shuffle":      {"en": "Shuffle",       "de": "Shuffle",    "ru": "shuffle"},
-        "oid_repeat":       {"en": "Repeat",        "de": "Repeat",     "ru": "Repeat"},
+        "oid_repeat":       {"en": "Repeat",        "de": "Repeat",     "ru": "Повтор"},
         "oid_artist":       {"en": "Artist",        "de": "Artist",     "ru": "Исполнитель"},
         "oid_title":        {"en": "Title",         "de": "Title",      "ru": "Название"},
         "oid_album":        {"en": "Album",         "de": "Album",      "ru": "Альбом"},
-        "oid_bitrate":      {"en": "Bitrate",       "de": "Bitrate",    "ru": "Bitrate"},
-        "oid_playlist":     {"en": "Playlist",      "de": "Playlist",   "ru": "Playlist"}
+        "oid_bitrate":      {"en": "Bitrate",       "de": "Bitrate",    "ru": "Битрейт"},
+        "oid_playlist":     {"en": "Playlist",      "de": "Playlist",   "ru": "Плейлист"},
+        "oid_playid":       {"en": "Play id",      "de": "Play id",   "ru": "Play id"},
+        "oid_id":           {"en": "Current playing id",      "de": "Current playing id",   "ru": "Current playing id"}
     });
 }
 
@@ -66,7 +68,11 @@ vis.binds.players = {
         oid_artist:  {val: '',        role: 'media.artist',     selector: '', objName: ''},
         oid_title:   {val: '',        role: 'media.title',      selector: '', objName: ''},
         oid_album:   {val: '',        role: 'media.album',      selector: '', objName: ''},
-        oid_bitrate: {val: '',        role: 'media.bitrate',    selector: '', objName: ''}
+        oid_bitrate: {val: '',        role: 'media.bitrate',    selector: '', objName: ''},
+        oid_playlist:{val: '',        role: 'media.playlist',   selector: '', objName: ''},
+        oid_playid:  {val: '',        role: 'media.playid',     selector: '', objName: ''},
+        oid_id:      {val: '',        role: 'media.pos',        selector: '', objName: ''},
+        oid_browser: {val: '',        role: 'media.browser',    selector: '', objName: ''}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
@@ -133,29 +139,29 @@ vis.binds.players = {
                 }
             }
 
-            if (states.oid_artist.val) {
+            //if (states.oid_artist.val) {
                 $div.find('.winamp-artist').text('Artist: ' + states.oid_artist.val);
-            } else {
-                $div.find('.winamp-artist').hide();
-            }
+           // } else {
+            //    $div.find('.winamp-artist').hide();
+            //}
 
-            if (states.oid_title.val) {
+            //if (states.oid_title.val) {
                 $div.find('.winamp-title').text('Title: ' + states.oid_title.val);
-            } else {
-                $div.find('.winamp-title').hide();
-            }
+            //} else {
+            //    $div.find('.winamp-title').hide();
+            //}
 
-            if (states.oid_album.val) {
+           // if (states.oid_album.val) {
                 $div.find('.winamp-album').text('Album: ' + states.oid_album.val);
-            } else {
-                $div.find('.winamp-album').hide();
-            }
+           // } else {
+            //    $div.find('.winamp-album').hide();
+            //}
 
-            if (states.oid_bitrate.val) {
+            //if (states.oid_bitrate.val) {
                 $div.find('.winamp-bitrate').text('kbps: ' + states.oid_bitrate.val);
-            } else {
-                $div.find('.winamp-bitrate').hide();
-            }
+            //} else {
+             //   $div.find('.winamp-bitrate').hide();
+            //}
 
             if (states.oid_repeat.val){
                 $div.find('.winamp-repeat').show();
@@ -205,8 +211,7 @@ vis.binds.players = {
                     toggle('repeat');
                     break;
                 case 'playlist':
-                    $('.win-plst-head').parent().slideToggle( "slow", function() {
-                    });
+                    $('.win-plst-head').parent().slideToggle( "slow", function() {});
                     break;
                 case 'library':
                     //vis.setValue(data.oid_next, true);
@@ -331,40 +336,72 @@ vis.binds.players = {
             // remember bind handler
             $div.data('bindHandler', boundFuncs);
         }
+    },
+
+    createWidgetWinampBrowser: function (widgetID, view, data, style) {
+        var $div = $('#' + widgetID);
+        var playlist;
+        // if nothing found => wait
+        if (!$div.length) {
+            return setTimeout(function () {
+                vis.binds.players.createWidgetWinampBrowser(widgetID, view, data, style);
+            }, 100);
+        }
+
+        function updateStates(e, pl) {
+            var $div = $('#' + widgetID);
+            playlist = JSON.parse(pl);
+            $div.find('.winamp-playlist-container').empty();
+            playlist.forEach(function (item, i, plst) {
+                var obj = playlist[i];
+                var text = ' ';
+                if (obj.file) {
+                    text = obj.file.split('/');
+                    text = text[text.length - 1];
+                }
+                $div.find('.winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + text + '</li>');
+            });
+
+            $div.find('.winamp-playlist-container').on('click', 'li', function(){
+                var n = $(this).index();
+                vis.setValue(data.oid_playid, n);
+            });
+        }
+
+        function updatePosition(e, newVal, oldVal) {
+            var $div = $('#' + widgetID);
+            $div.find('.winamp-playlist-container').children().removeClass('active');
+            var id = parseInt(newVal) + 1;
+            setTimeout(function() {
+                $div.find('.winamp-playlist-container .item' + id).addClass('active');
+            }, 100);
+        }
+
+        if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
+            playlist = vis.states[data.oid_playlist + '.val'];
+            updateStates(null, playlist);
+        }
+
+        $div.find('.winamp-plst-close').on('click', function (e) {
+            $div.slideToggle('slow', function() {});
+        });
+
+
+        // subscribe on updates of values
+        var bound = [];
+        var boundFuncs = [];
+        if (data.oid_browser) {
+            bound.push(data.oid_browser + '.val');
+            boundFuncs.push(updateStates);
+            vis.states.bind(data.oid_browser + '.val', updateStates);
+        }
+        if (bound.length) {
+            // remember all ids, that bound
+            $div.data('bound', bound);
+            // remember bind handler
+            $div.data('bindHandler', boundFuncs);
+        }
     }
-    
-    /*
-     {
-     "items": [{
-     "album": "",
-     "artist": [],
-     "episode": -1,
-     "fanart": "",
-     "file": "smb://192.168.1.10/F/CAFE SOCIETY/BDMV/index.bdmv",
-     "genre": [],
-     "label": "index.bdmv",
-     "playcount": 1,
-     "rating": 0,
-     "season": -1,
-     "showtitle": "",
-     "thumbnail": "",
-     "title": "",
-     "track": -1,
-     "type": "unknown",
-     "year": 1969
-     }],
-     "limits": {
-     "end": 1,
-     "start": 0,
-     "total": 1
-     }
-     }
-     */
-    
-    
-    
-    
-    
 };
 
 if (vis.editMode) {
@@ -380,7 +417,7 @@ if (vis.editMode) {
             var roles = [];
             var s;
             for (s in vis.binds.players.states) {
-                if (!vis.binds.players.states.hasOwnProperty(s) || s === 'oid_alias') continue;
+                if (!vis.binds.players.states.hasOwnProperty(s)/* || s === 'oid_alias'*/) continue;
                 if (vis.views[view].widgets[widgetID].data[s]) continue;
 
                 roles.push(vis.binds.players.states[s].role);

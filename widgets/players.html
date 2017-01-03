@@ -62,19 +62,19 @@
         type="text/ejs"
         class="vis-tpl"
         data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
-        data-vis-attrs="oid_playlist/id;oid_playid/id;oid_id/id;"
+        data-vis-attrs="oid_playlist/id/onPlayChanged;oid_playid/id;oid_id/id;"
         data-vis-set="players"
         data-vis-type="val"
         data-vis-beta="true"
         data-vis-name="Winamp Playlist">
     <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" >
-            <div class="win-plst-head">
-                <img class="win-plst-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
-                <img class="win-plst-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
-                <img class="winamp-plst-close" src="widgets/players/img/winamp/closeBox.gif">
-                <div class="win-plst-head_c">
-                    <img class="win-plst-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
-                    <img class="win-plst-head_c-img" src="widgets/players/img/winamp/waPlaylistTitle.gif">
+            <div class="winamp-head">
+                <img class="winamp-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
+                <img class="winamp-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
+                <img class="winamp-close" src="widgets/players/img/winamp/closeBox.gif">
+                <div class="winamp-head_c">
+                    <img class="winamp-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
+                    <img class="winamp-head_c-img" src="widgets/players/img/winamp/waPlaylistTitle.gif">
                 </div>
             </div>
             <div class="win-plst-body">
@@ -99,3 +99,58 @@
     <% vis.binds.players.createWidgetWinampPlaylist(this.data.wid, this.view, this.data, this.style); %>
 	</div>
 </script>
+
+<script id="tplWinampBrowser"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
+        data-vis-attrs="oid_browser/id/onPlayChanged;"
+        data-vis-set="players"
+        data-vis-type="val"
+        data-vis-beta="true"
+        data-vis-name="Winamp Browser">
+    <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" >
+            <div class="winamp-head">
+                <img class="winamp-head_r" src="widgets/players/img/winamp/waBoxTitleRight.gif">
+                <img class="winamp-head_l" src="widgets/players/img/winamp/waBoxTitleLeft.gif">
+                <img class="winamp-close" src="widgets/players/img/winamp/closeBox.gif">
+                <div class="winamp-head_c">
+                    <img class="winamp-head_c-bg" src="widgets/players/img/winamp/waBoxBg.gif">
+                    <img class="winamp-head_c-img" src="widgets/players/img/winamp/titleML.gif">
+                </div>
+            </div>
+            <div style="clear: both; border-width: 1px; border-style: solid; border-color: black; background-color: rgb(28, 61, 125); overflow-x: hidden; overflow-y: auto;">
+                <div id="medialibrary">
+                    <table class="mlTable">
+                        <tbody>
+                        <tr>
+                            <td onclick="document.ml.sort(sortMethods.NAME);" class="mlHead">Name<img border="0" src="widgets/players/img/winamp/asc.gif"></td>
+                            <td onclick="document.ml.sort(sortMethods.MTIME);" class="mlHead">Date</td>
+                            <td onclick="document.ml.sort(sortMethods.SIZE);" class="mlHead">Size</td>
+                        </tr>
+                        <tr class="mlChoice">
+                            <td class="mlChoice">
+                                <a href="javascript:document.ml.back();"><img id="mlBackBtn" class="back" src="widgets/players/img/winamp/back_gray.jpg"></a>
+                                <a href="javascript:document.ml.forward();"><img id="mlForwBtn" class="forward" src="widgets/players/img/winamp/forward_gray.jpg"></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="loading" class="loading" style="display: none;">
+                    <img src="widgets/players/img/winamp/loading.gif">
+                </div>
+            </div>
+            <div style="height: 24px; background-color: transparent;">
+                <img src="widgets/players/img/winamp/waResize.gif" style="float: right; cursor: se-resize;">
+                <img src="widgets/players/img/winamp/waFooterLeft.gif" style="float: left;">
+                <div style="margin: 0px 10px; height: 24px; position: relative;">
+                    <img src="widgets/players/img/winamp/waFooterBg.gif" style="position: absolute; top: 0; left: 0; width: 100%; height: 24px;">
+                </div>
+            </div>
+
+
+    <% vis.binds.players.createWidgetWinampBrowser(this.data.wid, this.view, this.data, this.style); %>
+	</div>
+</script>
+
