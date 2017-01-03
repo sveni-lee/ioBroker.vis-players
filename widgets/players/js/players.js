@@ -269,33 +269,31 @@ vis.binds.players = {
             }, 100);
         }
 
-        function updateStates(pl) {
-           /* states = JSON.parse(JSON.stringify(vis.binds.players.states));
-            for (var s in states) {
-                if( states.hasOwnProperty(s)){
-                    if (data[s] && data[s] !== 'nothing_selected') { states[s].val = vis.states[data[s] + '.val']; }
-                }
-            }*/
-            playlist = JSON.parse(pl);
-
-                /*$div.find("#playListContainer").empty();
-                _playlist.forEach(function(item, i, arr) {
-                    $div.find("#playListContainer").append("<li class='item"+(i+1)+"'>"+(i+1)+' - '+_playlist[i].label+"</li>");
-                });
-                $div.find("#playListContainer .item"+(parseInt(vis.states[data.oid_position + '.val'])+1)).addClass("active");
-                $div.find('#playListContainer').on('click', "li", function(){
-                    var n=$(this).index();
-                    vis.setValue(data.oid_position, n);
-                });*/
-            console.log(playlist);
-             $div.find('#winamp-playlist-container').empty();
-             playlist.forEach(function(item, i, plst) {
-                 var obj = playlist[i];
-                 console.log(obj);
-                 $div.find('#winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + obj.file + '</li>');
-             });
+        if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
+            playlist = vis.states[data.oid_playlist + '.val'];
+            updateStates(playlist);
         }
-        
+
+        function updateStates(pl) {
+            playlist = JSON.parse(pl);
+            $div.find('.winamp-playlist-container').empty();
+            console.log(playlist);
+            playlist.forEach(function (item, i, plst) {
+                var obj = playlist[i];
+                var text = ' ';
+                if (obj.file) {
+                    text = obj.file.split('/');
+                    text = text[text.length - 1];
+                }
+                $div.find('.winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + text + '</li>');
+            });
+
+            $div.find('.winamp-playlist-container').on('click', 'li', function(){
+                var n = $(this).index();
+                vis.setValue(data.oid_playid, n);
+            });
+        }
+
         $('.winamp-plst-close').on('click', function (e){
             $div.slideToggle('slow', function() {});
         });
@@ -306,8 +304,16 @@ vis.binds.players = {
                 updateStates(newVal);
             });
         }
-        // initial update
-        //updateStates();
+        if (data.oid_pos) {
+            vis.states.bind(data.oid_id + '.val', function (e, newVal, oldVal) {
+                var $div = $('#' + widgetID);
+                $div.find('.winamp-playlist-container').children().removeClass('active');
+                var id = parseInt(newVal) + 1;
+                setTimeout(function() {
+                    $div.find('.winamp-playlist-container .item' + id).addClass('active');
+                }, 100);
+            });
+        }
     }
     
     /*
