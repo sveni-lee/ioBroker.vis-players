@@ -258,9 +258,8 @@ vis.binds.players = {
             if (seekSlider.hasClass('ui-slider')) seekSlider.slider('destroy');
         });
     },
-    createWidgetWinampPlaylist: function (widgetID, view, data, style) { //tplWinampPlayer
+    createWidgetWinampPlaylist: function (widgetID, view, data, style) {
         var $div = $('#' + widgetID);
-        //var states = {};
         var playlist;
         // if nothing found => wait
         if (!$div.length) {
@@ -269,15 +268,10 @@ vis.binds.players = {
             }, 100);
         }
 
-        if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
-            playlist = vis.states[data.oid_playlist + '.val'];
-            updateStates(playlist);
-        }
-
-        function updateStates(pl) {
+        function updateStates(e, pl) {
+            var $div = $('#' + widgetID);
             playlist = JSON.parse(pl);
             $div.find('.winamp-playlist-container').empty();
-            console.log(playlist);
             playlist.forEach(function (item, i, plst) {
                 var obj = playlist[i];
                 var text = ' ';
@@ -294,25 +288,48 @@ vis.binds.players = {
             });
         }
 
-        $('.winamp-plst-close').on('click', function (e){
+        function updatePosition(e, newVal, oldVal) {
+            var $div = $('#' + widgetID);
+            $div.find('.winamp-playlist-container').children().removeClass('active');
+            var id = parseInt(newVal) + 1;
+            setTimeout(function() {
+                $div.find('.winamp-playlist-container .item' + id).addClass('active');
+            }, 100);
+        }
+
+        if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
+            playlist = vis.states[data.oid_playlist + '.val'];
+            updateStates(null, playlist);
+        }
+
+        if (data.oid_pos && data.oid_pos !== 'nothing_selected'){
+            updatePosition(null, vis.states[data.oid_pos + '.val']);
+        }
+
+        $div.find('.winamp-plst-close').on('click', function (e) {
             $div.slideToggle('slow', function() {});
         });
 
         // subscribe on updates of values
+        var bound = [];
+        var boundFuncs = [];
         if (data.oid_playlist) {
-            vis.states.bind(data.oid_playlist + '.val', function (e, newVal, oldVal) {
-                updateStates(newVal);
-            });
+            bound.push(data.oid_playlist + '.val');
+            boundFuncs.push(updateStates);
+            vis.states.bind(data.oid_playlist + '.val', updateStates);
         }
+
         if (data.oid_pos) {
-            vis.states.bind(data.oid_id + '.val', function (e, newVal, oldVal) {
-                var $div = $('#' + widgetID);
-                $div.find('.winamp-playlist-container').children().removeClass('active');
-                var id = parseInt(newVal) + 1;
-                setTimeout(function() {
-                    $div.find('.winamp-playlist-container .item' + id).addClass('active');
-                }, 100);
-            });
+            bound.push(data.oid_id + '.val');
+            boundFuncs.push(updatePosition);
+            vis.states.bind(data.oid_id + '.val', updatePosition);
+        }
+
+        if (bound.length) {
+            // remember all ids, that bound
+            $div.data('bound', bound);
+            // remember bind handler
+            $div.data('bindHandler', boundFuncs);
         }
     }
     
