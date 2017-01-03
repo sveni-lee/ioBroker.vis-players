@@ -11,7 +11,7 @@
     height: 161px;
     z-index: 2;
 }
-.winamp-head { height: 17px;}
+.win-plst-head .win-browser-head{ height: 17px;}
 .winamp-head_r { float: right;}
 .winamp-head_l { float: left;}
 
@@ -186,7 +186,8 @@
 .win-plst-footer-bg{position: absolute;top: 0;left: 0;width: 100%;height: 24px;}
 .MLfooter{position: relative;}
 .Mlfooter{}
-.winamp-close{position: absolute; top: 0; right: 0; cursor: pointer; z-index: 10;}
+.winamp-plst-close {position: absolute; top: 0; right: 0; cursor: pointer; z-index: 10;}
+.winamp-brwsr-close {position: absolute; top: 0; right: 0; cursor: pointer; z-index: 10;}
 .winamp-playlist {overflow-x: hidden;}
 .winamp-playlist ul{
     list-style-type: none;
@@ -204,4 +205,53 @@
 }
 .winamp-playlist li:hover, .winamp-playlist li:nth-child(even):hover {background-color: #6788C9;color: #BBD2FF;}
 .winamp-playlist li.active {background-color: #00bd9b;color: #fff;}
+
+.medialibrary {
+    background-color: #1C3D7D;
+}
+.medialibrary-loading{display: none;}
+
+td.mlHead {
+    white-space: nowrap;
+    background-color: #3C5D9D;
+    border: solid 1px #0C2D6D;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 10px;
+    text-align: center;
+}
+.mlTable{
+    width: 100%;
+    cursor: pointer;
+    border-collapse: collapse;
+}
+.mlItem {
+    padding: 0px 0px 2px 16px;
+    margin: 0px 0px 0px 3px;
+    -moz-user-select: none;
+    text-align: left;
+    vertical-align: middle;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+    font-weight: normal;
+    cursor: pointer;
+    background-repeat: no-repeat;
+}
+
+.winamp-browser {overflow-x: hidden;}
+.winamp-browser ul{
+    list-style-type: none;
+    vertical-align: top;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 10px;
+    color: #FFFFFF;
+    font-weight: normal;
+    cursor: pointer;
+    margin-left: 5px;
+    padding-left: 5px;
+    margin-top: 5px;
+    padding-top: 0;
+    white-space: nowrap;
+}
 

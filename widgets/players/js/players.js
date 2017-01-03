@@ -214,7 +214,7 @@ vis.binds.players = {
                     $('.win-plst-head').parent().slideToggle( "slow", function() {});
                     break;
                 case 'library':
-                    //vis.setValue(data.oid_next, true);
+                    $('.win-browser-head').parent().slideToggle( "slow", function() {});
                     break;
                 default:
                     break;
@@ -340,7 +340,8 @@ vis.binds.players = {
 
     createWidgetWinampBrowser: function (widgetID, view, data, style) {
         var $div = $('#' + widgetID);
-        var playlist;
+        var browser;
+        var path = '/';
         // if nothing found => wait
         if (!$div.length) {
             return setTimeout(function () {
@@ -348,44 +349,79 @@ vis.binds.players = {
             }, 100);
         }
 
-        function updateStates(e, pl) {
+        function updateStates(e, pl){
             var $div = $('#' + widgetID);
-            playlist = JSON.parse(pl);
-            $div.find('.winamp-playlist-container').empty();
-            playlist.forEach(function (item, i, plst) {
-                var obj = playlist[i];
-                var text = ' ';
-                if (obj.file) {
-                    text = obj.file.split('/');
-                    text = text[text.length - 1];
-                }
-                $div.find('.winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + text + '</li>');
-            });
-
-            $div.find('.winamp-playlist-container').on('click', 'li', function(){
+            var url;
+            try {
+                browser = JSON.parse(pl);
+            } catch (e) {
+                console.error(e);
+            }
+            if (typeof browser === 'object'){
+                console.log('++++++++++- ' + pl);
+                $div.find('.browser-container').empty();
+                browser.files.forEach(function (item, i, plst){
+                    var obj = browser.files[i];
+                    var text = ' ';
+                    if (obj.file){
+                        text = obj.file.split('/');
+                        text = text[text.length - 1];
+                    }
+                    if (obj.filetype === 'directory'){
+                        url = 'widgets/players/img/winamp/folder.png';
+                    } else if (obj.filetype === 'file'){
+                        url = 'widgets/players/img/winamp/audiofile.png';
+                    }
+                    //$div.find('.browser-container').append('<li class="item' + (i + 1) + '">'+ text + '</li>');
+                    $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 10px; height: 10px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
+                });
+            }
+            $div.find('.browser-container').on('click', 'li', function(){
                 var n = $(this).index();
-                vis.setValue(data.oid_playid, n);
+                var folder = browser.files[n].file;
+                console.log('click - ' + folder);
+                path = getPath(folder);
+                vis.setValue(data.oid_browser, folder);
             });
         }
+
 
         function updatePosition(e, newVal, oldVal) {
             var $div = $('#' + widgetID);
-            $div.find('.winamp-playlist-container').children().removeClass('active');
+            $div.find('.browser-container').children().removeClass('active');
             var id = parseInt(newVal) + 1;
             setTimeout(function() {
-                $div.find('.winamp-playlist-container .item' + id).addClass('active');
+                $div.find('.browser-container .item' + id).addClass('active');
             }, 100);
         }
 
-        if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
-            playlist = vis.states[data.oid_playlist + '.val'];
-            updateStates(null, playlist);
+        if (data.oid_browser && data.oid_browser !== 'nothing_selected'){
+            browser = vis.states[data.oid_browser + '.val'];
+            updateStates(null, browser);
         }
 
-        $div.find('.winamp-plst-close').on('click', function (e) {
+        $div.find('.winamp-brwsr-close').on('click', function (e) {
             $div.slideToggle('slow', function() {});
         });
+        $div.find('.mlItem').on('click', function (e) {
+            vis.setValue(data.oid_browser, path);
+            path = getPath(path);
+        });
 
+        function getPath(folders){
+            var arr = [];
+            if (folders && ~folders.indexOf('/')){
+                arr = folders.split('/');
+                if (arr.length > 0){
+                    delete arr[arr.length-1];
+                    folders = arr.join('/');
+                }
+                folders = folders.substring(0, folders.length - 1);
+            } else {
+                folders = '/';
+            }
+            return folders;
+        }
 
         // subscribe on updates of values
         var bound = [];
