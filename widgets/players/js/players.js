@@ -31,18 +31,23 @@ if (vis.editMode) {
         "oid_shuffle":      {"en": "Shuffle",       "de": "Shuffle",    "ru": "shuffle"},
         "oid_repeat":       {"en": "Repeat",        "de": "Repeat",     "ru": "Повтор"},
         "oid_artist":       {"en": "Artist",        "de": "Artist",     "ru": "Исполнитель"},
-        "oid_title":        {"en": "Title",         "de": "Title",      "ru": "Название"},
+        "oid_title":        {"en": "Title",         "de": "Titel",      "ru": "Название"},
         "oid_album":        {"en": "Album",         "de": "Album",      "ru": "Альбом"},
         "oid_bitrate":      {"en": "Bitrate",       "de": "Bitrate",    "ru": "Битрейт"},
         "oid_playlist":     {"en": "Playlist",      "de": "Playlist",   "ru": "Плейлист"},
-        "oid_playid":       {"en": "Play id",      "de": "Play id",   "ru": "Play id"},
-        "oid_id":           {"en": "Current playing id",      "de": "Current playing id",   "ru": "Current playing id"}
+        "oid_playid":       {"en": "Play id",       "de": "Play id",    "ru": "Play id"},
+        "oid_cover":        {"en": "Cover URL",     "de": "Bild URL",   "ru": "URL обложки"},
+        "oid_next_title":   {"en": "Next title",    "de": "Nächster Titel", "ru": "Следующий"},
+        "oid_id":           {"en": "Current playing id", "de": "Current playing id", "ru": "Current playing id"},
+        "oid_state":        {"en": "Player state",  "de": "Playerzustand", "ru": "Состояние плеера"},
+        "text_next":        {"en": "Text 'Next'",   "de": "Text 'Nächstes'", "ru": "Текст 'Следующий'"}
     });
 }
 
 // add translations for non-edit mode
 $.extend(true, systemDictionary, {
-    "Instance":  {"en": "Instance", "de": "Instanz", "ru": "Инстанция"}
+    "Instance":  {"en": "Instance",     "de": "Instanz",     "ru": "Инстанция"},
+    "Next:":     {"en": "Next:",        "de": "Nächstes:",   "ru": "Следующая:"}
 });
 
 // this code can be placed directly in players.html
@@ -55,26 +60,29 @@ vis.binds.players = {
         }
     },
     states: {
-        oid_play:    {val: undefined, role: 'button.play',      selector: '', objName: 'play'},
-        oid_next:    {val: undefined, role: 'button.next',      selector: '', objName: 'next'},
-        oid_prev:    {val: undefined, role: 'button.prev',      selector: '', objName: ''},
-        oid_stop:    {val: undefined, role: 'button.stop',      selector: '', objName: ''},
-        oid_pause:   {val: undefined, role: 'button.pause',     selector: '', objName: ''},
-        oid_seek:    {val: 0,         role: 'media.seek',       selector: '', objName: ''},
-        oid_vol:     {val: 0,         role: 'level.volume',     selector: '', objName: ''},
-        oid_mute:    {val: undefined, role: 'media.mute',       selector: '', objName: ''},
-        oid_shuffle: {val: undefined, role: 'media.mode.shuffle', selector: '', objName: ''},
-        oid_repeat:  {val: undefined, role: 'media.mode.repeat', selector: '', objName: ''},
-        oid_artist:  {val: '',        role: 'media.artist',     selector: '', objName: ''},
-        oid_title:   {val: '',        role: 'media.title',      selector: '', objName: ''},
-        oid_album:   {val: '',        role: 'media.album',      selector: '', objName: ''},
-        oid_bitrate: {val: '',        role: 'media.bitrate',    selector: '', objName: ''},
-        oid_playlist:{val: '',        role: 'media.playlist',   selector: '', objName: ''},
-        oid_playid:  {val: '',        role: 'media.playid',     selector: '', objName: ''},
-        oid_pos:      {val: '',        role: 'media.pos',        selector: '', objName: ''},
-        oid_browser: {val: '',        role: 'media.browser',    selector: '', objName: ''},
-        oid_add:     {val: '',        role: 'media.add',        selector: '', objName: ''},
-        oid_clear:   {val: '',        role: 'media.clear',      selector: '', objName: ''}
+        oid_play:       {val: undefined, role: 'button.play',        winamp: true,  sonos: true},
+        oid_state:      {val: undefined, role: 'media.state',        winamp: false, sonos: true},
+        oid_next:       {val: undefined, role: 'button.next',        winamp: true,  sonos: true},
+        oid_prev:       {val: undefined, role: 'button.prev',        winamp: true,  sonos: true},
+        oid_stop:       {val: undefined, role: 'button.stop',        winamp: true},
+        oid_cover:      {val: '',        role: 'media.cover',        winamp: false, sonos: true},
+        oid_pause:      {val: undefined, role: 'button.pause',       winamp: true,  sonos: true},
+        oid_seek:       {val: 0,         role: 'media.seek',         winamp: true},
+        oid_vol:        {val: 0,         role: 'level.volume',       winamp: true,  sonos: true},
+        oid_mute:       {val: undefined, role: 'media.mute',         winamp: true},
+        oid_shuffle:    {val: undefined, role: 'media.mode.shuffle', winamp: true},
+        oid_repeat:     {val: undefined, role: 'media.mode.repeat',  winamp: true},
+        oid_artist:     {val: '',        role: 'media.artist',       winamp: true,  sonos: true},
+        oid_title:      {val: '',        role: 'media.title',        winamp: true,  sonos: true},
+        oid_next_title: {val: '',        role: 'media.title.next',   winamp: false, sonos: true},
+        oid_album:      {val: '',        role: 'media.album',        winamp: true,  sonos: true},
+        oid_bitrate:    {val: '',        role: 'media.bitrate',      winamp: true},
+        oid_playlist:   {val: '',        role: 'media.playlist',     winamp: true},
+        oid_playid:     {val: '',        role: 'media.playid',       winamp: true},
+        oid_pos:        {val: '',        role: 'media.pos',          winamp: true},
+        oid_browser:    {val: '',        role: 'media.browser',      winamp: true},
+        oid_add:        {val: '',        role: 'media.add',          winamp: true},
+        oid_clear:      {val: '',        role: 'media.clear',        winamp: true}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
@@ -90,43 +98,38 @@ vis.binds.players = {
             }, 100);
         }
 
-        $(function() {
-            // optimize memory, so the whole data object can be cleaned by garbage collector
-            var oid_vol = data.oid_vol;
+        // optimize memory, so the whole data object can be cleaned by garbage collector
+        var oid_vol = data.oid_vol;
 
-            if (oid_vol) {
-                volSlider.slider({
-                    range: 'min',
-                    min: 0,
-                    value: vis.states['data.oid_vol.val'],//states.oid_vol.val,
-                    start: function (event,ui) {},
-                    slide: function (event, ui) {
-                        vis.setValue(oid_vol, ui.value);
-                    },
-                    stop: function (event,ui) {}
-                });
-            } else {
-                volSlider.hide();
-            }
+        if (oid_vol) {
+            volSlider.slider({
+                range: 'min',
+                min:    0,
+                max:    100,
+                value:  0,
+                slide: function (event, ui) {
+                    vis.setValue(oid_vol, ui.value);
+                }
+            });
+        } else {
+            volSlider.hide();
+        }
 
-            // optimize memory, so the whole data object can be cleaned by garbage collector
-            var oid_seek = data.oid_seek;
-            if (oid_seek) {
-                seekSlider.slider({
-                    range: 'min',
-                    min:    0,
-                    max:    100,
-                    value:  0,//states.oid_seek.val,
-                    start:  function (event, ui) {},
-                    slide:  function (event, ui) {
-                        vis.setValue(oid_seek, ui.value);
-                    },
-                    stop: function (event, ui) {}
-                });
-            } else {
-                seekSlider.hide();
-            }
-        });
+        // optimize memory, so the whole data object can be cleaned by garbage collector
+        var oid_seek = data.oid_seek;
+        if (oid_seek) {
+            seekSlider.slider({
+                range: 'min',
+                min:    0,
+                max:    100,
+                value:  0,//states.oid_seek.val,
+                slide:  function (event, ui) {
+                    vis.setValue(oid_seek, ui.value);
+                }
+            });
+        } else {
+            seekSlider.hide();
+        }
 
         function updateStates() {
             var $div        = $('#' + widgetID);
@@ -136,42 +139,43 @@ vis.binds.players = {
             states = JSON.parse(JSON.stringify(vis.binds.players.states));
 
             for (var s in states) {
-                if (states.hasOwnProperty(s) && data[s] && data[s] !== 'nothing_selected') {
+                if (states.hasOwnProperty(s) && states[s].winamp && data[s] && data[s] !== 'nothing_selected') {
                     states[s].val = vis.states[data[s] + '.val'];
                 }
             }
 
-            //if (states.oid_artist.val) {
+            // make it universal and if user do not defined artist => do not show it
+            if (data.oid_artist) {
                 $div.find('.winamp-artist').text('Artist: ' + states.oid_artist.val);
-           // } else {
-            //    $div.find('.winamp-artist').hide();
-            //}
+            } else {
+                $div.find('.winamp-artist').hide();
+            }
 
-            //if (states.oid_title.val) {
+            if (data.oid_title) {
                 $div.find('.winamp-title').text('Title: ' + states.oid_title.val);
-            //} else {
-            //    $div.find('.winamp-title').hide();
-            //}
+            } else {
+                $div.find('.winamp-title').hide();
+            }
 
-           // if (states.oid_album.val) {
+            if (data.oid_album) {
                 $div.find('.winamp-album').text('Album: ' + states.oid_album.val);
-           // } else {
-            //    $div.find('.winamp-album').hide();
-            //}
+            } else {
+                $div.find('.winamp-album').hide();
+            }
 
-            //if (states.oid_bitrate.val) {
+            if (data.oid_bitrate) {
                 $div.find('.winamp-bitrate').text('kbps: ' + states.oid_bitrate.val);
-            //} else {
-             //   $div.find('.winamp-bitrate').hide();
-            //}
+            } else {
+                $div.find('.winamp-bitrate').hide();
+            }
 
-            if (states.oid_repeat.val){
+            if (states.oid_repeat.val) {
                 $div.find('.winamp-repeat').show();
             } else {
                 $div.find('.winamp-repeat').hide();
             }
 
-            if (states.oid_shuffle.val){
+            if (states.oid_shuffle.val) {
                 $div.find('.winamp-shuffle').show();
             } else {
                 $div.find('.winamp-shuffle').hide();
@@ -187,7 +191,7 @@ vis.binds.players = {
         }
 
         $div.find('.winamp-btn').on('click', function (e) {
-            switch (e.target.id) {
+            switch ($(e.target).data('id')) {
                 case 'mute':
                     toggle('mute');
                     break;
@@ -213,10 +217,10 @@ vis.binds.players = {
                     toggle('repeat');
                     break;
                 case 'playlist':
-                    $('.win-plst-head').parent().slideToggle( "slow", function() {});
+                    $('.win-plst-head').parent().slideToggle('slow', function() {});
                     break;
                 case 'library':
-                    $('.win-browser-head').parent().slideToggle( "slow", function() {});
+                    $('.win-browser-head').parent().slideToggle('slow', function() {});
                     break;
                 default:
                     break;
@@ -237,11 +241,10 @@ vis.binds.players = {
             }
         }
 
-        //debugger;
         // subscribe on updates of values
         var bound = [];
         for (var s in vis.binds.players.states) {
-            if (!data[s] || data[s] === 'nothing_selected') continue;
+            if (!data[s] || data[s] === 'nothing_selected' || !vis.binds.players.states[s].winamp) continue;
 
             bound.push(data[s] + '.val');
             vis.states.bind(data[s] + '.val', updateStates);
@@ -265,6 +268,7 @@ vis.binds.players = {
             if (seekSlider.hasClass('ui-slider')) seekSlider.slider('destroy');
         });
     },
+
     createWidgetWinampPlaylist: function (widgetID, view, data, style) {
         var $div = $('#' + widgetID);
         var playlist;
@@ -432,11 +436,162 @@ vis.binds.players = {
             // remember all ids, that bound
             $div.data('bound', bound);
         }
+    },
+
+    createWidgetSonosPlayer: function (widgetID, view, data, style) { //tplSonosMobilePlayer
+        var $div       = $('#' + widgetID);
+        // if nothing found => wait
+        if (!$div.length) {
+            return setTimeout(function () {
+                vis.binds.players.createWidgetSonosPlayer(widgetID, view, data, style);
+            }, 100);
+        }
+        // translate
+        $div.find('.sonos-next-track-title').html(data.text_next || _('Next:'));
+
+        if ($div.width() < $div.height()) {
+            $div.removeClass('sonos-landscape').addClass('sonos-portrait');
+        }
+
+        var oid_vol = data.oid_vol;
+
+        if (oid_vol) {
+            $div.find('.sonos-master-volume').slider({
+                range: 'min',
+                min:   0,
+                max:   100,
+                value: 0,
+                slide: function (event, ui) {
+                    vis.setValue($(this).data('id'), ui.value);
+                }
+            }).data('id', oid_vol);
+        } else {
+            $div.find('.sonos-master-volume').hide();
+        }
+
+        if (!data.oid_play && !data.oid_pause) $div.find('.sonos-play-pause').hide();
+
+        if (!data.oid_prev) $div.find('.sonos-prev').hide();
+
+        if (!data.oid_next) $div.find('.sonos-next').hide();
+
+        $div.find('.sonos-button').on('click', function (e) {
+            switch ($(this).data('control')) {
+                case 'mute':
+                    //toggle('mute');
+                    break;
+                case 'play':
+                    vis.setValue(data.oid_play, true);
+                    break;
+                case 'next':
+                    vis.setValue(data.oid_next, true);
+                    break;
+                case 'prev':
+                    vis.setValue(data.oid_prev, true);
+                    break;
+                case 'stop':
+                    vis.setValue(data.oid_stop, true);
+                    break;
+                case 'pause':
+                    vis.setValue(data.oid_pause, true);
+                    break;
+                case 'shuffle':
+                    //toggle('shuffle');
+                    break;
+                case 'repeat':
+                    //toggle('repeat');
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        function updateStates() {
+            var $div = $('#' + widgetID);
+            var $volSlider = $div.find('.sonos-master-volume');
+
+            var states = JSON.parse(JSON.stringify(vis.binds.players.states));
+
+            for (var s in states) {
+                if (states.hasOwnProperty(s) && states[s].sonos && data[s] && data[s] !== 'nothing_selected') {
+                    states[s].val = vis.states[data[s] + '.val'];
+                }
+            }
+            if (data.oid_state) {
+                if (states.oid_state.val === 'play' || states.oid_state.val === 'playing' || states.oid_state.val === true || states.oid_state.val === 'true') {
+                    $div.find('.sonos-button[data-control="play"]').hide();
+                    $div.find('.sonos-button[data-control="pause"]').show();
+                } else  {
+                    $div.find('.sonos-button[data-control="play"]').show();
+                    $div.find('.sonos-button[data-control="pause"]').hide();
+                }
+            }
+
+            // make it universal and if user do not defined artist => do not show it
+            if (data.oid_cover) {
+                $div.find('.sonos-current-track-art').attr('src', states.oid_cover.val ? states.oid_cover.val + '?' + new Date().getTime() : 'widgets/players/img/sonos/no_cover.jpg');
+            } else {
+                $div.find('.sonos-current-track-art').attr('src', 'widgets/players/img/sonos/no_cover.jpg');
+            }
+
+            if (data.oid_title) {
+                $div.find('.sonos-track').text(states.oid_title.val);
+            } else {
+                $div.find('.sonos-track').hide();
+            }
+
+            if (data.oid_album) {
+                $div.find('.sonos-album').text(states.oid_album.val);
+            } else {
+                $div.find('.sonos-album').hide();
+            }
+
+            if (data.oid_artist) {
+                $div.find('.sonos-artist').text(states.oid_artist.val);
+            } else {
+                $div.find('.sonos-artist').hide();
+            }
+
+            if (data.oid_next_title) {
+                $div.find('.sonos-next-track-text').text(states.oid_next_title.val);
+            } else {
+                $div.find('.sonos-next-track').hide();
+            }
+
+            if ($volSlider.hasClass('ui-slider')) {
+                $volSlider.slider('value', states.oid_vol.val);
+            }
+        }
+
+        // subscribe on updates of values
+        var bound = [];
+        for (var s in vis.binds.players.states) {
+            if (!data[s] || data[s] === 'nothing_selected' || !vis.binds.players.states[s].sonos) continue;
+
+            bound.push(data[s] + '.val');
+            vis.states.bind(data[s] + '.val', updateStates);
+        }
+
+        if (bound.length) {
+            // remember all ids, that bound
+            $div.data('bound', bound);
+            // remember bind handler
+            $div.data('bindHandler', updateStates);
+        }
+
+        updateStates();
+
+        // destroy sliders
+        $div.data('destroy', function (id) {
+            var $div       = $('#' + id);
+            var $volSlider = $div.find('.sonos-master-volume');
+            if ($volSlider.hasClass('ui-slider')) $volSlider.slider('destroy');
+        });
     }
 };
 
 if (vis.editMode) {
-    vis.binds.players.onPlayChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
+    vis.binds.players.onPlayCommonChanged = function (widgetID, view, newId, attr, isCss, oldValue, type) {
         if (oldValue && oldValue !== 'nothing_selected') return;
         console.log('---------: ' + widgetID +' - ' + view + ' - ' + newId + ' - ' + attr + ' - ' + isCss);
 
@@ -448,7 +603,7 @@ if (vis.editMode) {
             var roles = [];
             var s;
             for (s in vis.binds.players.states) {
-                if (!vis.binds.players.states.hasOwnProperty(s)/* || s === 'oid_alias'*/) continue;
+                if (!vis.binds.players.states.hasOwnProperty(s) || !vis.binds.players.states[s][type]) continue;
                 if (vis.views[view].widgets[widgetID].data[s]) continue;
 
                 roles.push(vis.binds.players.states[s].role);
@@ -477,6 +632,12 @@ if (vis.editMode) {
             }
         }
         return changed;
+    };
+    vis.binds.players.onPlayWinampChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
+        return vis.binds.players.onPlayCommonChanged(widgetID, view, newId, attr, isCss, oldValue, 'winamp');
+    };
+    vis.binds.players.onPlaySonosChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
+        return vis.binds.players.onPlayCommonChanged(widgetID, view, newId, attr, isCss, oldValue, 'sonos');
     };
 }
 	

@@ -10,23 +10,23 @@
         type="text/ejs"
         class="vis-tpl"
         data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp.png"></img>'
-        data-vis-attrs="oid_play/id/onPlayChanged;oid_next/id;oid_prev/id;oid_stop/id;oid_pause/id;oid_seek/id;oid_vol/id;oid_mute/id;oid_shuffle/id;oid_repeat/id;oid_artist/id;oid_title/id;oid_album/id;oid_bitrate/id;"
+        data-vis-attrs="oid_play/id/onPlayWinampChanged;oid_next/id;oid_prev/id;oid_stop/id;oid_pause/id;oid_seek/id;oid_vol/id;oid_mute/id;oid_shuffle/id;oid_repeat/id;oid_artist/id;oid_title/id;oid_album/id;oid_bitrate/id;"
         data-vis-set="players"
         data-vis-type="val"
         data-vis-beta="true"
         data-vis-name="Winamp Player">
     <div class="vis-widget <%== this.data.attr('class') %>" style="width:354px; height:161px" id="<%= this.data.attr('wid') %>" data-vis-resizable='{"disabled":true, "handles":"e"}'>
     <map id="consoleMap" name="consoleMap">
-        <area class="winamp-btn" id="repeat" shape="circle" coords="323,47,9" href="#" alt="Toggle Repeat">
-        <area class="winamp-btn" id="shuffle" shape="circle" coords="324,71,9" href="#" alt="Toggle Shuffle">
-        <area class="winamp-btn" id="playlist" shape="circle" coords="304,99,11" href="#" alt="Toggle Playlist">
-        <area class="winamp-btn" id="library" shape="circle" coords="329,99,11" href="#" alt="Toggle Media Library">
-        <area class="winamp-btn" id="mute" shape="circle" coords="171,129,7" href="#" alt="Toggle Mute">
-        <area class="winamp-btn" id="prev" shape="circle" coords="19,124,11" href="#" alt="Previous Track">
-        <area class="winamp-btn" id="next" shape="circle" coords="138,124,11" href="#" alt="Next Track">
-        <area class="winamp-btn" id="stop" shape="circle" coords="108,125,11" href="#" alt="Stop">
-        <area class="winamp-btn" id="pause" shape="circle" coords="78,125,11" href="#" alt="Pause">
-        <area class="winamp-btn" id="play" shape="circle" coords="48,125,11" href="#" alt="Play">
+        <area class="winamp-btn" data-id="repeat"   shape="circle" coords="323,47,9"   href="#" alt="Toggle Repeat">
+        <area class="winamp-btn" data-id="shuffle"  shape="circle" coords="324,71,9"   href="#" alt="Toggle Shuffle">
+        <area class="winamp-btn" data-id="playlist" shape="circle" coords="304,99,11"  href="#" alt="Toggle Playlist">
+        <area class="winamp-btn" data-id="library"  shape="circle" coords="329,99,11"  href="#" alt="Toggle Media Library">
+        <area class="winamp-btn" data-id="mute"     shape="circle" coords="171,129,7"  href="#" alt="Toggle Mute">
+        <area class="winamp-btn" data-id="prev"     shape="circle" coords="19,124,11"  href="#" alt="Previous Track">
+        <area class="winamp-btn" data-id="next"     shape="circle" coords="138,124,11" href="#" alt="Next Track">
+        <area class="winamp-btn" data-id="stop"     shape="circle" coords="108,125,11" href="#" alt="Stop">
+        <area class="winamp-btn" data-id="pause"    shape="circle" coords="78,125,11"  href="#" alt="Pause">
+        <area class="winamp-btn" data-id="play"     shape="circle" coords="48,125,11"  href="#" alt="Play">
     </map>
     <div class="winamp">
         <div class="winamp-head">
@@ -55,9 +55,10 @@
             <div class="winamp-bitrate">kbps: </div>
         </div>
     </div>
-       <% vis.binds.players.createWidgetWinampPlayer(this.data.wid, this.view, this.data, this.style);%>
+       <% vis.binds.players.createWidgetWinampPlayer(this.data.wid, this.view, this.data, this.style); %>
 	</div>
 </script>
+
 <script id="tplWinampPlaylist"
         type="text/ejs"
         class="vis-tpl"
@@ -153,3 +154,34 @@
 	</div>
 </script>
 
+<script id="tplSonosMobilePlayer"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/sonos.png"></img>'
+        data-vis-attrs="oid_play/id/onPlaySonosChanged;oid_state/id;oid_next/id;oid_prev/id;oid_pause/id;oid_vol/id;oid_artist/id;oid_title/id;oid_album/id;oid_cover/id;oid_next_title/id;text_next;"
+        data-vis-set="players"
+        data-vis-beta="true"
+        data-vis-update-style="true"
+        data-vis-name="Sonos Player">
+    <div class="vis-widget sonos-body sonos-landscape <%== this.data.attr('class') %>" style="width: 354px; height: 161px; background: black" id="<%= this.data.attr('wid') %>">
+        <div class="sonos-status-container">
+            <img class="sonos-current-track-art" />
+            <div class="sonos-current-track-info">
+                <div>
+                    <p class="sonos-track"></p>
+                    <p class="sonos-artist"></p>
+                    <p class="sonos-album"></p>
+                </div>
+                <p class="sonos-next-track"><span class="sonos-next-track-title"></span> <span class="sonos-next-track-text"></span></p>
+                <div class="sonos-controls">
+                    <img class="sonos-button" data-control="prev"  src="widgets/players/img/sonos/prev.svg">
+                    <img class="sonos-button" data-control="play"  src="widgets/players/img/sonos/play.svg">
+                    <img class="sonos-button" data-control="pause" src="widgets/players/img/sonos/pause.svg" style="display: none">
+                    <img class="sonos-button" data-control="next"  src="widgets/players/img/sonos/next.svg">
+                    <div class="sonos-master-volume"></div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <% vis.binds.players.createWidgetSonosPlayer(this.data.wid, this.view, this.data, this.style); %>
+</script>

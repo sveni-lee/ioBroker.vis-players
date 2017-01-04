@@ -262,3 +262,217 @@ td.mlHead {
     left: 5px;
 }
 
+
+/* --------------------- SONOS Fonts ------------------------- */
+@font-face
+{
+    font-family:sonos-logoregular;
+    src: url(sonos-logo-regular-webfont.woff);
+    font-weight:400;
+    font-style:normal;
+}
+
+@font-face
+{
+    font-family:sonoshandbookproregular;
+    src: url(sonoshandbookpro-regular-webfont.woff);
+    font-weight:400;
+    font-style:normal;
+}
+
+@font-face
+{
+    font-family:sonoshandbookpromedium;
+    src: url(sonoshandbookpro-medium-webfont.woff);
+    font-weight:400;
+    font-style:normal;
+}
+
+@font-face
+{
+    font-family: sonoshandbookprolight;
+    src: url(sonoshandbookpro-light-webfont.woff);
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* --------------------- SONOS Common ------------------------- */
+.sonos-body {
+    background: #000000;
+    color: #fff;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    font-family: 'sonoshandbookprolight', sans-serif;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sonos-status-container {
+    height: 100%;
+}
+
+.sonos-current-track-info p {
+    margin: 0.5%;
+}
+
+.sonos-current-track-info .sonos-track {
+    font-weight: bold;
+}
+
+.sonos-current-track-info .sonos-artist,
+.sonos-current-track-info .sonos-album {
+    color: #ccc;
+}
+
+.sonos-controls {
+    text-align: center;
+}
+
+.sonos-controls img {
+    transition: background 0.2s ease-out;
+}
+
+.sonos-controls img:active {
+    background: #aaa;
+    transition: background 0s;
+}
+
+.sonos-master-volume {
+    margin-bottom: 7%;
+    margin-top: 3%;
+    height: 1px;
+    position: relative;
+    width: calc(100% - 16px);
+}
+
+.sonos-landscape .sonos-body {
+    /*font-size: 3%;*/
+}
+
+.sonos-master-volume .ui-slider-handle{
+    width: 12px;
+    height: 12px;
+    margin-top: -1px;
+    text-align: center;
+    line-height: 1.6em;
+    border-radius: 6px;
+    background: white;
+}
+.sonos-master-volume .ui-slider-range {
+    background: white;
+}
+
+/* --------------------- SONOS landscape ------------------------- */
+.sonos-landscape .sonos-current-track-info {
+    width: calc(50% - 12px);
+    height: calc(100% - 32px);
+    position: absolute;
+    right: 8px;
+    padding: 8px;
+    padding-left: 5%;
+    vertical-align: bottom;
+    background-image: linear-gradient(left, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+}
+
+.sonos-landscape .sonos-current-track-info .sonos-next-track {
+    /*font-size: 2%;*/
+    font-size: smaller;
+}
+
+.sonos-landscape .sonos-current-track-art {
+    height: 100%;
+    float: left;
+}
+
+.sonos-landscape .sonos-controls {
+    width: calc(100% - 20px);
+    position: absolute;
+    bottom: 0;
+}
+
+.sonos-landscape .sonos-controls img {
+    width: 16%;
+    height: 16%;
+    transition: background 0.05s;
+    border-radius: 4%;
+}
+
+.sonos-landscape .sonos-master-volume .sonos-scrubber {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #fff;
+    position: absolute;
+    top: -6px;
+}
+.sonos-landscape .sonos-master-volume .sonos-background {
+    top: 2%;
+}
+
+.sonos-landscape .sonos-master-volume .sonos-tooltip {
+    padding: 4px 6px 2px;
+    /*font-size: 3%;*/
+    margin-top: -5%;
+}
+
+.sonos-landscape .sonos-player-volumes h6 {
+    /*font-size: 4%;*/
+    margin: 1.5% 5% -2%;
+}
+
+/* --------------------- SONOS portrait ------------------------- */
+.sonos-portrait .sonos-body {
+    /*font-size: 5%;*/
+}
+
+.sonos-portrait .sonos-current-track-info {
+    width: calc(100% - 32px);
+    position: absolute;
+    bottom: 8px;
+    padding: 8px;
+    background-image: linear-gradient(top, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0, rgba(0, 0, 0, 0.87) 5%);
+}
+
+.sonos-portrait .sonos-current-track-info .sonos-next-track {
+    /*font-size: 4%;*/
+}
+
+.sonos-portrait .sonos-current-track-art {
+    width: 100%;
+}
+
+.sonos-portrait .sonos-controls img {
+    width: 17%;
+    height: 17%;
+    border-radius: 8.5%;
+}
+
+.sonos-portrait .sonos-master-volume .sonos-scrubber {
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background: #fff;
+    position: absolute;
+    top: -6px;
+}
+
+.sonos-portrait .sonos-master-volume .sonos-background {
+    top: 2%;
+}
+
+.sonos-portrait .sonos-player-volumes h6 {
+    margin: 1.5% 1.5% -2%;
+    /*font-size: 4%;*/
+}
+
+
