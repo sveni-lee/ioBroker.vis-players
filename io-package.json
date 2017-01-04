@@ -1,8 +1,15 @@
 {
     "common": {
         "name":                     "vis-players",
-        "version": "0.0.20",
+        "version": "0.1.0",
         "title":                    "ioBroker Visualisation - Media players widgets",
+		"news": {
+            "0.1.0": {
+                "en": 				"new widget like Sonos",
+                "de": 				"Neues Widget für Sonos",
+                "ru": 				"Новый виджет для Sonos"
+            }
+		},
         "desc": {
             "en":                   "Media Players Widgets for ioBroker.vis",
             "de":                   "Media Players Widgets für ioBroker.vis",

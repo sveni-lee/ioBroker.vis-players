@@ -1,13 +1,21 @@
 ![Logo](admin/players.png)
 # ioBroker.vis-players
+
 [![NPM version](https://img.shields.io/npm/v/iobroker.vis-players.svg)](https://www.npmjs.com/package/iobroker.vis-players)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.vis-players.svg)](https://www.npmjs.com/package/iobroker.vis-players)
 
 [![NPM](https://nodei.co/npm/iobroker.vis-players.png?downloads=true)](https://nodei.co/npm/iobroker.vis-players/)
 
 ![winamp](/widgets/players/img/winamp.png)
+![winamp](/widgets/players/img/sonos.png)
+
+
+Widgets for media players.
 
 ## Changelog
+
+#### 0.1.0
+* (Bluefox) new widget like Sonos
 
 #### 0.0.20
 * (instalator) fix file manager

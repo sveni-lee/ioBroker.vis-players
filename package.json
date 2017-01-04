@@ -1,13 +1,14 @@
 {
   "name": "iobroker.vis-players",
   "description": "Media Players Widgets for ioBroker.vis",
-  "version": "0.0.20",
+  "version": "0.1.0",
   "author": {
     "name": "instalator",
     "email": "vvvalt@mail.ru"
   },
   "contributors": [
-    "instalator <vvvalt@mail.ru>"
+    "instalator <vvvalt@mail.ru>",
+	"bluefox <dogafox@gmail.com>"
   ],
   "homepage": "https://github.com/instalator/ioBroker.vis-players",
   "repository": {
@@ -30,11 +31,7 @@
     "grunt-replace": "^0.9.3",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-jscs": "^2.0.0",
-    "grunt-http": "^1.6.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-compress": "^0.13.0",
-    "grunt-contrib-copy": "^0.8.0",
-    "grunt-exec": "^0.4.6"
+    "grunt-http": "^1.6.0"
   },
   "bugs": {
     "url": "https://github.com/instalator/ioBroker.vis-players/issues"
