@@ -15,6 +15,7 @@ Widgets for media players.
 ## Changelog
 
 #### 0.1.0
+* (instalator) fix different error
 * (Bluefox) new widget like Sonos
 
 #### 0.0.20
