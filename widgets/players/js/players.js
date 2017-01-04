@@ -191,6 +191,7 @@ vis.binds.players = {
         }
 
         $div.find('.winamp-btn').on('click', function (e) {
+            console.log($(e.target).data('id'));
             switch ($(e.target).data('id')) {
                 case 'mute':
                     toggle('mute');
@@ -234,7 +235,7 @@ vis.binds.players = {
 
             console.log('Press button - ' + btn + ' / val=' + val + ' /state=' + state);
 
-            if (val === 0 || val === '0' || val === false || val === 'false' || val === 'off') {
+            if (val === 0 || val === '0' || val === false || val === 'false' || val === 'off' || val === 'undefined') {
                 vis.setValue(state, true);
             } else if (val === 1 || val === '1' || val === true || val === 'true' || val === 'on') {
                 vis.setValue(state, false);
