@@ -47,7 +47,7 @@ $.extend(true, systemDictionary, {
 
 // this code can be placed directly in players.html
 vis.binds.players = {
-    version: "0.0.1",
+    version: "0.0.20",
     showVersion: function () {
         if (vis.binds.players.version) {
             console.log('Version players: ' + vis.binds.players.version);
@@ -71,7 +71,7 @@ vis.binds.players = {
         oid_bitrate: {val: '',        role: 'media.bitrate',    selector: '', objName: ''},
         oid_playlist:{val: '',        role: 'media.playlist',   selector: '', objName: ''},
         oid_playid:  {val: '',        role: 'media.playid',     selector: '', objName: ''},
-        oid_id:      {val: '',        role: 'media.pos',        selector: '', objName: ''},
+        oid_pos:      {val: '',        role: 'media.pos',        selector: '', objName: ''},
         oid_browser: {val: '',        role: 'media.browser',    selector: '', objName: ''},
         oid_add:     {val: '',        role: 'media.add',        selector: '', objName: ''},
         oid_clear:   {val: '',        role: 'media.clear',      selector: '', objName: ''}
@@ -303,7 +303,7 @@ vis.binds.players = {
             var id = parseInt(newVal) + 1;
             setTimeout(function() {
                 $div.find('.winamp-playlist-container .item' + id).addClass('active');
-            }, 100);
+            }, 500);
         }
 
         if (data.oid_playlist && data.oid_playlist !== 'nothing_selected'){
@@ -332,9 +332,9 @@ vis.binds.players = {
         }
 
         if (data.oid_pos) {
-            bound.push(data.oid_id + '.val');
+            bound.push(data.oid_pos + '.val');
             boundFuncs.push(updatePosition);
-            vis.states.bind(data.oid_id + '.val', updatePosition);
+            vis.states.bind(data.oid_pos + '.val', updatePosition);
         }
 
         if (bound.length) {
@@ -349,6 +349,7 @@ vis.binds.players = {
         var $div = $('#' + widgetID);
         var browser;
         var path = '/';
+        var current_path;
         // if nothing found => wait
         if (!$div.length) {
             return setTimeout(function () {
@@ -363,7 +364,6 @@ vis.binds.players = {
                 browser = JSON.parse(pl);
             } catch (e) {}
             if (typeof browser === 'object'){
-                console.log('++++++++++- ' + pl);
                 $div.find('.browser-container').empty();
                 browser.files.forEach(function (item, i, plst){
                     var obj = browser.files[i];
@@ -373,12 +373,11 @@ vis.binds.players = {
                         text = text[text.length - 1];
                     }
                     if (obj.filetype === 'directory'){
-                        url = 'widgets/players/img/winamp/folder.png';
+                        url = 'widgets/players/img/winamp/folder.gif';
                     } else if (obj.filetype === 'file'){
-                        url = 'widgets/players/img/winamp/audiofile.png';
+                        url = 'widgets/players/img/winamp/audiofile.gif';
                     }
-                    //$div.find('.browser-container').append('<li class="item' + (i + 1) + '">'+ text + '</li>');
-                    $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 10px; height: 10px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
+                    $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 16px; height: 16px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
                 });
             }
             $div.find('.browser-container').on('click', 'li', function(){
@@ -386,18 +385,9 @@ vis.binds.players = {
                 var folder = browser.files[n].file;
                 console.log('click - ' + folder);
                 path = getPath(folder);
+                current_path = folder;
                 vis.setValue(data.oid_browser, folder);
             });
-        }
-
-
-        function updatePosition(e, newVal, oldVal) {
-            var $div = $('#' + widgetID);
-            $div.find('.browser-container').children().removeClass('active');
-            var id = parseInt(newVal) + 1;
-            setTimeout(function() {
-                $div.find('.browser-container .item' + id).addClass('active');
-            }, 100);
         }
 
         if (data.oid_browser && data.oid_browser !== 'nothing_selected'){
@@ -410,7 +400,11 @@ vis.binds.players = {
         });
         $div.find('.mlItem').on('click', function (e) {
             vis.setValue(data.oid_browser, path);
+            current_path = path;
             path = getPath(path);
+        });
+        $div.find('.browser-btn-add').on('click', function (e) {
+            vis.setValue(data.oid_add, current_path);
         });
 
         function getPath(folders){
@@ -430,17 +424,13 @@ vis.binds.players = {
 
         // subscribe on updates of values
         var bound = [];
-        var boundFuncs = [];
         if (data.oid_browser) {
             bound.push(data.oid_browser + '.val');
-            boundFuncs.push(updateStates);
             vis.states.bind(data.oid_browser + '.val', updateStates);
         }
         if (bound.length) {
             // remember all ids, that bound
             $div.data('bound', bound);
-            // remember bind handler
-            $div.data('bindHandler', boundFuncs);
         }
     }
 };

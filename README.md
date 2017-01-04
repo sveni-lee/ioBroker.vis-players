@@ -9,6 +9,9 @@
 
 ## Changelog
 
+#### 0.0.20
+* (instalator) fix file manager
+
 #### 0.0.12
 * (instalator) added pre file mahager
 * (Bluefox) destroy widgets and binds on change
