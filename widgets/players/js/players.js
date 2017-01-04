@@ -72,7 +72,9 @@ vis.binds.players = {
         oid_playlist:{val: '',        role: 'media.playlist',   selector: '', objName: ''},
         oid_playid:  {val: '',        role: 'media.playid',     selector: '', objName: ''},
         oid_id:      {val: '',        role: 'media.pos',        selector: '', objName: ''},
-        oid_browser: {val: '',        role: 'media.browser',    selector: '', objName: ''}
+        oid_browser: {val: '',        role: 'media.browser',    selector: '', objName: ''},
+        oid_add:     {val: '',        role: 'media.add',        selector: '', objName: ''},
+        oid_clear:   {val: '',        role: 'media.clear',      selector: '', objName: ''}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
@@ -275,7 +277,9 @@ vis.binds.players = {
 
         function updateStates(e, pl) {
             var $div = $('#' + widgetID);
-            playlist = JSON.parse(pl);
+            try {
+                playlist = JSON.parse(pl);
+            } catch (e) {}
             $div.find('.winamp-playlist-container').empty();
             playlist.forEach(function (item, i, plst) {
                 var obj = playlist[i];
@@ -313,6 +317,9 @@ vis.binds.players = {
 
         $div.find('.winamp-plst-close').on('click', function (e) {
             $div.slideToggle('slow', function() {});
+        });
+        $div.find('.win-plst-btn-clear').on('click', function (e) {
+            vis.setValue(data.oid_clear, '');
         });
 
         // subscribe on updates of values
@@ -354,9 +361,7 @@ vis.binds.players = {
             var url;
             try {
                 browser = JSON.parse(pl);
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) {}
             if (typeof browser === 'object'){
                 console.log('++++++++++- ' + pl);
                 $div.find('.browser-container').empty();

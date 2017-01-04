@@ -237,9 +237,10 @@ td.mlHead {
     font-weight: normal;
     cursor: pointer;
     background-repeat: no-repeat;
+    background-image:url(../img/winamp/folder_up.gif);
 }
-
 .winamp-browser {overflow-x: hidden;}
+.winamp-browser li:hover, .winamp-browser li:nth-child(even):hover {background-color: #6788C9;color: #BBD2FF;}
 .winamp-browser ul{
     list-style-type: none;
     vertical-align: top;
@@ -253,5 +254,11 @@ td.mlHead {
     margin-top: 5px;
     padding-top: 0;
     white-space: nowrap;
+}
+.browser-btn-add, .win-plst-btn-clear{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 5px;
 }
 

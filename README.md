@@ -9,6 +9,10 @@
 
 ## Changelog
 
+#### 0.0.12
+* (instalator) added pre file mahager
+* (Bluefox) destroy widgets and binds on change
+
 #### 0.0.11
 * (instalator) added widget winamp playlist
 

@@ -62,7 +62,7 @@
         type="text/ejs"
         class="vis-tpl"
         data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
-        data-vis-attrs="oid_playlist/id/onPlayChanged;oid_playid/id;oid_id/id;"
+        data-vis-attrs="oid_playlist/id/onPlayChanged;oid_playid/id;oid_id/id;oid_clear/id;"
         data-vis-set="players"
         data-vis-type="val"
         data-vis-beta="true"
@@ -88,11 +88,7 @@
                 <img class="win-plst-footer-l" src="widgets/players/img/winamp/waFooterLeft.gif">
                 <div class="win-plst-footer-b">
                     <img class="win-plst-footer-bg" src="widgets/players/img/winamp/waFooterBg.gif">
-                    <div class="MLfooter">
-                        <a class="Mlfooter" href="#">
- -                            <!--<img border="0" src="widgets/players/img/winamp/plclear.gif">-->
-                        </a>
-                    </div>
+                    <img class="win-plst-btn-clear" src="widgets/players/img/winamp/plclear.gif">
                 </div>
             </div>
 
@@ -104,7 +100,7 @@
         type="text/ejs"
         class="vis-tpl"
         data-vis-prev='<img style="width:112px; height:52px" src="widgets/players/img/winamp_plst.png"></img>'
-        data-vis-attrs="oid_browser/id/onPlayChanged;"
+        data-vis-attrs="oid_browser/id/onPlayChanged;oid_add/id;"
         data-vis-set="players"
         data-vis-type="val"
         data-vis-beta="true"
@@ -124,39 +120,31 @@
                     <table class="mlTable">
                         <tbody>
                         <tr>
-                            <td onclick="document.ml.sort(sortMethods.NAME);" class="mlHead">Name<img border="0" src="widgets/players/img/winamp/asc.gif"></td>
-                            <td onclick="document.ml.sort(sortMethods.MTIME);" class="mlHead">Date</td>
-                            <td onclick="document.ml.sort(sortMethods.SIZE);" class="mlHead">Size</td>
+                            <td class="mlHead">Name<img border="0" src="widgets/players/img/winamp/asc.gif"></td>
+                            <!--<td class="mlHead">Date</td>-->
+                            <!--<td class="mlHead">Size</td>-->
                         </tr>
-                        <!--<tr class="mlChoice">
+                        <tr class="mlChoice">
                             <td class="mlChoice">
-                                <a href="javascript:document.ml.back();"><img id="mlBackBtn" class="back" src="widgets/players/img/winamp/back_gray.jpg"></a>
-                                <a href="javascript:document.ml.forward();"><img id="mlForwBtn" class="forward" src="widgets/players/img/winamp/forward_gray.jpg"></a>
+                                <span class="mlItem">..</span>
+                                <div class="winamp-browser">
+                                    <ul class="browser-container"></ul>
+                                </div>
                             </td>
-                        </tr>-->
-                        <tr index="0" onselectstart="return false;" class="mlChoice">
-						<td class="mlChoice">
-							<!--<img border="0" src="widgets/players/img/winamp/play.gif" class="play" onclick="document.ml.playAll()">
-							<img border="0" src="widgets/players/img/winamp/nqnext.gif" class="nq" onclick="document.ml.enqueueAllNext()">
-							<img border="0" src="widgets/players/img/winamp/nq.gif" class="nq" onclick="document.ml.enqueueAll()">-->
-							<span class="mlItem" style="background-image:url(widgets/players/img/winamp/folder_up.gif)"">..</span>
-							<div class="winamp-browser">
-                                <ul class="browser-container"></ul>
-                            </div>
-						</td>
-					</tr>
+					    </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="medialibrary-loading">
+                <!--<div class="medialibrary-loading">
                     <img src="widgets/players/img/winamp/loading.gif">
-                </div>
+                </div>-->
             </div>
             <div class="win-plst-footer"">
                 <img class="winamp-head_r" src="widgets/players/img/winamp/waResize.gif">
                 <img class="winamp-head_l" src="widgets/players/img/winamp/waFooterLeft.gif">
                 <div class="win-plst-footer-b">
                     <img class="win-plst-footer-bg" src="widgets/players/img/winamp/waFooterBg.gif">
+                    <img class="browser-btn-add" src="widgets/players/img/winamp/search.gif">
                 </div>
             </div>
 
