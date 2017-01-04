@@ -1,7 +1,7 @@
 /*
     ioBroker.vis players-widgets Widget-Set
 
-    version: "0.0.1"
+    version: "0.1.0"
 
     Copyright 10.2015-2016 instalator<vvvalt@mail.ru>
 
@@ -52,7 +52,7 @@ $.extend(true, systemDictionary, {
 
 // this code can be placed directly in players.html
 vis.binds.players = {
-    version: "0.0.20",
+    version: "0.1.0",
     showVersion: function () {
         if (vis.binds.players.version) {
             console.log('Version players: ' + vis.binds.players.version);
