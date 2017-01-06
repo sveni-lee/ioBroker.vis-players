@@ -375,7 +375,11 @@ vis.binds.players = {
                     var text = ' ';
                     if (obj.file){
                         text = obj.file.split('/');
-                        text = text[text.length - 1];
+                        if(text[text.length - 1]){
+                            text = text[text.length - 1];
+                        } else {
+                            text = text[text.length - 2];
+                        }
                     }
                     if (obj.filetype === 'directory'){
                         url = 'widgets/players/img/winamp/folder.gif';
@@ -416,15 +420,33 @@ vis.binds.players = {
             var arr = [];
             if (folders && ~folders.indexOf('/')){
                 arr = folders.split('/');
-                if (arr.length > 0){
-                    delete arr[arr.length-1];
-                    folders = arr.join('/');
+                var len = arr.length;
+                if (!arr[len - 1]){
+                    arr.splice((len - 2), 2);
+                } else {
+                    arr.splice((len - 1), 1);
                 }
-                folders = folders.substring(0, folders.length - 1);
+                if(arr[0] === 'smb:'){
+                    if (arr.length === 3 && isIPv4(arr[2]) || arr.length == 1){
+                        arr = [];
+                    }
+                    if (arr.length == 2){
+                        arr[1] = '/';
+                    }
+                }
+                if (arr.length > 0){
+                    folders = arr.join('/');
+                } else {
+                    folders = '/';
+                }
             } else {
                 folders = '/';
             }
             return folders;
+        }
+
+        function isIPv4(addr) {
+            return /^(([01]?\d{1,2}|2[0-4]\d|25[0-5])(\.|$)){4}$/.test(addr);
         }
 
         // subscribe on updates of values

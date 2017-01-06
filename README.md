@@ -14,6 +14,10 @@ Widgets for media players.
 
 ## Changelog
 
+#### 0.1.1
+* (instalator) change oid_pos to oid_track
+* (instalator) change file manager for kodi
+
 #### 0.1.0
 * (instalator) fix different error
 * (Bluefox) new widget like Sonos

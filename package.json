@@ -1,7 +1,7 @@
 {
   "name": "iobroker.vis-players",
   "description": "Media Players Widgets for ioBroker.vis",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "instalator",
     "email": "vvvalt@mail.ru"
