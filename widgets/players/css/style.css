@@ -96,6 +96,7 @@
     border: none;
     top: -6px;
     margin-left: -12px;
+    touch-action: initial; !important;
 }
 .winamp-vol-slider .ui-slider-range {
     background: #ffffff; /* Старые браузеры */
@@ -152,6 +153,7 @@
     border: none;
     top: -6px;
     margin-left: -12px;
+    touch-action: initial; !important;
 }
 .winamp-seek-slider .ui-slider-range {
     background: #ffffff;
