@@ -32,15 +32,15 @@ if (vis.editMode) {
         "oid_repeat":       {"en": "Repeat",        "de": "Repeat",     "ru": "Повтор"},
         "oid_artist":       {"en": "Artist",        "de": "Artist",     "ru": "Исполнитель"},
         "oid_title":        {"en": "Title",         "de": "Titel",      "ru": "Название"},
-        "oid_album":        {"en": "Album",         "de": "Album",      "ru": "Альбом"},
-        "oid_bitrate":      {"en": "Bitrate",       "de": "Bitrate",    "ru": "Битрейт"},
-        "oid_playlist":     {"en": "Playlist",      "de": "Playlist",   "ru": "Плейлист"},
-        "oid_playid":       {"en": "Play id",       "de": "Play id",    "ru": "Play id"},
-        "oid_cover":        {"en": "Cover URL",     "de": "Bild URL",   "ru": "URL обложки"},
-        "oid_next_title":   {"en": "Next title",    "de": "Nächster Titel", "ru": "Следующий"},
-        "oid_id":           {"en": "Current playing id", "de": "Current playing id", "ru": "Current playing id"},
-        "oid_state":        {"en": "Player state",  "de": "Playerzustand", "ru": "Состояние плеера"},
-        "text_next":        {"en": "Text 'Next'",   "de": "Text 'Nächstes'", "ru": "Текст 'Следующий'"}
+        "oid_album":      {"en": "Album",         "de": "Album",      "ru": "Альбом"},
+        "oid_bitrate":    {"en": "Bitrate",       "de": "Bitrate",    "ru": "Битрейт"},
+        "oid_playlist":   {"en": "Playlist",      "de": "Playlist",   "ru": "Плейлист"},
+        "oid_playid":     {"en": "Play id",       "de": "Play id",    "ru": "Play id"},
+        "oid_cover":      {"en": "Cover URL",     "de": "Bild URL",   "ru": "URL обложки"},
+        "oid_next_title": {"en": "Next title",    "de": "Nächster Titel", "ru": "Следующий"},
+        "oid_track":      {"en": "Current playing id", "de": "Current playing id", "ru": "Current playing id"},
+        "oid_state":      {"en": "Player state",  "de": "Playerzustand", "ru": "Состояние плеера"},
+        "text_next":      {"en": "Text 'Next'",   "de": "Text 'Nächstes'", "ru": "Текст 'Следующий'"}
     });
 }
 
@@ -79,7 +79,7 @@ vis.binds.players = {
         oid_bitrate:    {val: '',        role: 'media.bitrate',      winamp: true},
         oid_playlist:   {val: '',        role: 'media.playlist',     winamp: true},
         oid_playid:     {val: '',        role: 'media.playid',       winamp: true},
-        oid_pos:        {val: '',        role: 'media.pos',          winamp: true},
+        oid_track:      {val: '',        role: 'media.track',        winamp: true},
         oid_browser:    {val: '',        role: 'media.browser',      winamp: true},
         oid_add:        {val: '',        role: 'media.add',          winamp: true},
         oid_clear:      {val: '',        role: 'media.clear',        winamp: true}
@@ -316,8 +316,8 @@ vis.binds.players = {
             updateStates(null, playlist);
         }
 
-        if (data.oid_pos && data.oid_pos !== 'nothing_selected'){
-            updatePosition(null, vis.states[data.oid_pos + '.val']);
+        if (data.oid_track && data.oid_track !== 'nothing_selected'){
+            updatePosition(null, vis.states[data.oid_track + '.val']);
         }
 
         $div.find('.winamp-plst-close').on('click', function (e) {
@@ -336,10 +336,10 @@ vis.binds.players = {
             vis.states.bind(data.oid_playlist + '.val', updateStates);
         }
 
-        if (data.oid_pos) {
-            bound.push(data.oid_pos + '.val');
+        if (data.oid_track) {
+            bound.push(data.oid_track + '.val');
             boundFuncs.push(updatePosition);
-            vis.states.bind(data.oid_pos + '.val', updatePosition);
+            vis.states.bind(data.oid_track + '.val', updatePosition);
         }
 
         if (bound.length) {
