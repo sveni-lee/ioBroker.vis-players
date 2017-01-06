@@ -1,9 +1,14 @@
 {
     "common": {
         "name":                     "vis-players",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "title":                    "ioBroker Visualisation - Media players widgets",
 		"news": {
+            "0.1.2": {
+                "en": 				"fix for foobar2000",
+                "de": 				"fix for foobar2000",
+                "ru": 				"fix for foobar2000"
+            },
             "0.1.1": {
                 "en": 				"change oid_pos to oid_track\nchange file manager for kodi",
                 "de": 				"change oid_pos to oid_track\nchange file manager for kodi",

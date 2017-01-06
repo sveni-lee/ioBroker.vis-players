@@ -14,6 +14,9 @@ Widgets for media players.
 
 ## Changelog
 
+#### 0.1.2
+* (instalator) fix for foobar2000
+
 #### 0.1.1
 * (instalator) change oid_pos to oid_track
 * (instalator) change file manager for kodi

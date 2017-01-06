@@ -235,7 +235,7 @@ vis.binds.players = {
 
             console.log('Press button - ' + btn + ' / val=' + val + ' /state=' + state);
 
-            if (val === 0 || val === '0' || val === false || val === 'false' || val === 'off' || val === 'undefined') {
+            if (val === 0 || val === '0' || val === false || val === 'false' || val === 'off' || val === undefined) {
                 vis.setValue(state, true);
             } else if (val === 1 || val === '1' || val === true || val === 'true' || val === 'on') {
                 vis.setValue(state, false);
@@ -373,8 +373,15 @@ vis.binds.players = {
                 browser.files.forEach(function (item, i, plst){
                     var obj = browser.files[i];
                     var text = ' ';
-                    if (obj.file){
+                    if (obj.file && ~obj.file.indexOf('/')){
                         text = obj.file.split('/');
+                        if(text[text.length - 1]){
+                            text = text[text.length - 1];
+                        } else {
+                            text = text[text.length - 2];
+                        }
+                    } else if (obj.file && ~obj.file.indexOf('\\')){
+                        text = obj.file.split('\\');
                         if(text[text.length - 1]){
                             text = text[text.length - 1];
                         } else {
@@ -418,14 +425,16 @@ vis.binds.players = {
 
         function getPath(folders){
             var arr = [];
+            var len;
             if (folders && ~folders.indexOf('/')){
                 arr = folders.split('/');
-                var len = arr.length;
+                len = arr.length;
                 if (!arr[len - 1]){
                     arr.splice((len - 2), 2);
                 } else {
                     arr.splice((len - 1), 1);
                 }
+                console.log('Array - ' + arr); //
                 if(arr[0] === 'smb:'){
                     if (arr.length === 3 && isIPv4(arr[2]) || arr.length == 1){
                         arr = [];
@@ -434,14 +443,34 @@ vis.binds.players = {
                         arr[1] = '/';
                     }
                 }
+                console.log('Array 2 - ' + arr);
                 if (arr.length > 0){
                     folders = arr.join('/');
+                } else {
+                    folders = '/';
+                }
+            } else if (folders && ~folders.indexOf('\\')){
+                arr = folders.split('\\');
+                console.log('Array split - ' + arr);
+                len = arr.length;
+                arr.splice((len - 1), 1);
+
+                console.log('Array 3 - ' + arr);
+                len = arr.length;
+                if(arr[0] && ~arr[0].indexOf(':')){
+                    arr.splice((len - 1), 1);
+                    arr[arr.length-1] += '\\';
+                }
+                console.log('Array 4 - ' + arr);
+                if (arr.length > 0){
+                    folders = arr.join('\\');
                 } else {
                     folders = '/';
                 }
             } else {
                 folders = '/';
             }
+            console.log('folders - ' + folders);
             return folders;
         }
 
