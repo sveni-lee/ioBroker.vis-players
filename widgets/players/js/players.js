@@ -124,7 +124,7 @@ vis.binds.players = {
                 max:    100,
                 value:  0,//states.oid_seek.val,
                 slide:  function (event, ui) {
-                    vis.setValue(oid_seek, ui.value);
+                    vis.setValue(oid_seek, parseInt(ui.value, 10));
                 }
             });
         } else {
