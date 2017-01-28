@@ -280,21 +280,24 @@ vis.binds.players = {
             }, 100);
         }
 
-        function updateStates(e, pl) {
+        function updateStates(e, pl){
             var $div = $('#' + widgetID);
             try {
                 playlist = JSON.parse(pl);
-            } catch (e) {}
+            } catch (e) {
+            }
             $div.find('.winamp-playlist-container').empty();
-            playlist.forEach(function (item, i, plst) {
-                var obj = playlist[i];
-                var text = ' ';
-                if (obj.file) {
-                    text = obj.file.split('/');
-                    text = text[text.length - 1];
-                }
-                $div.find('.winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + text + '</li>');
-            });
+            if (playlist){
+                playlist.forEach(function (item, i, plst){
+                    var obj = playlist[i];
+                    var text = ' ';
+                    if (obj.file){
+                        text = obj.file.split('/');
+                        text = text[text.length - 1];
+                    }
+                    $div.find('.winamp-playlist-container').append('<li class="item' + (i + 1) + '">' + ( i + 1) + ' - ' + text + '</li>');
+                });
+            }
 
             $div.find('.winamp-playlist-container').on('click', 'li', function(){
                 var n = $(this).index();
@@ -370,31 +373,33 @@ vis.binds.players = {
             } catch (e) {}
             if (typeof browser === 'object'){
                 $div.find('.browser-container').empty();
-                browser.files.forEach(function (item, i, plst){
-                    var obj = browser.files[i];
-                    var text = ' ';
-                    if (obj.file && ~obj.file.indexOf('/')){
-                        text = obj.file.split('/');
-                        if(text[text.length - 1]){
-                            text = text[text.length - 1];
-                        } else {
-                            text = text[text.length - 2];
+                if(browser.files){
+                    browser.files.forEach(function (item, i, plst){
+                        var obj = browser.files[i];
+                        var text = ' ';
+                        if (obj.file && ~obj.file.indexOf('/')){
+                            text = obj.file.split('/');
+                            if (text[text.length - 1]){
+                                text = text[text.length - 1];
+                            } else {
+                                text = text[text.length - 2];
+                            }
+                        } else if (obj.file && ~obj.file.indexOf('\\')){
+                            text = obj.file.split('\\');
+                            if (text[text.length - 1]){
+                                text = text[text.length - 1];
+                            } else {
+                                text = text[text.length - 2];
+                            }
                         }
-                    } else if (obj.file && ~obj.file.indexOf('\\')){
-                        text = obj.file.split('\\');
-                        if(text[text.length - 1]){
-                            text = text[text.length - 1];
-                        } else {
-                            text = text[text.length - 2];
+                        if (obj.filetype === 'directory'){
+                            url = 'widgets/players/img/winamp/folder.gif';
+                        } else if (obj.filetype === 'file'){
+                            url = 'widgets/players/img/winamp/audiofile.gif';
                         }
-                    }
-                    if (obj.filetype === 'directory'){
-                        url = 'widgets/players/img/winamp/folder.gif';
-                    } else if (obj.filetype === 'file'){
-                        url = 'widgets/players/img/winamp/audiofile.gif';
-                    }
-                    $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 16px; height: 16px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
-                });
+                        $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 16px; height: 16px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
+                    });
+                }
             }
             $div.find('.browser-container').on('click', 'li', function(){
                 var n = $(this).index();
@@ -684,6 +689,12 @@ if (vis.editMode) {
             }
         }
         return changed;
+    };
+    vis.binds.players.onWinampBrowserChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
+        return vis.binds.players.onPlayCommonChanged(widgetID, view, newId, attr, isCss, oldValue, 'winamp');
+    };
+    vis.binds.players.onWinampPlaylistChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
+        return vis.binds.players.onPlayCommonChanged(widgetID, view, newId, attr, isCss, oldValue, 'winamp');
     };
     vis.binds.players.onPlayWinampChanged = function (widgetID, view, newId, attr, isCss, oldValue) {
         return vis.binds.players.onPlayCommonChanged(widgetID, view, newId, attr, isCss, oldValue, 'winamp');
