@@ -376,7 +376,7 @@ vis.binds.players = {
                 if(browser.files){
                     browser.files.forEach(function (item, i, plst){
                         var obj = browser.files[i];
-                        var text = ' ';
+                        var text = obj.file;// ' '; //TODO
                         if (obj.file && ~obj.file.indexOf('/')){
                             text = obj.file.split('/');
                             if (text[text.length - 1]){
