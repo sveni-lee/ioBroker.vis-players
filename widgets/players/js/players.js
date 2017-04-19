@@ -290,7 +290,7 @@ vis.binds.players = {
             if (playlist){
                 playlist.forEach(function (item, i, plst){
                     var obj = playlist[i];
-                    var text = ' ';
+                    var text =obj.file;//  ' ';
                     if (obj.file){
                         text = obj.file.split('/');
                         text = text[text.length - 1];
