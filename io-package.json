@@ -46,7 +46,7 @@
         "onlyWWW":                  true,
         "noConfig":                 true,
         "singleton":                true,
-        "type":                     "vis",
+        "type":                     "visualization-widgets",
         "restartAdapters":          ["vis"]
     },
     "native": {
