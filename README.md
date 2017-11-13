@@ -14,6 +14,9 @@ Widgets for media players.
 
 ## Changelog
 
+#### 0.1.5
+* (instalator) small fix
+
 #### 0.1.4
 * (instalator) fix seek. fix autoload object in settings
 
