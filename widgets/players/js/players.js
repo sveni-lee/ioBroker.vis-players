@@ -371,7 +371,7 @@ vis.binds.players = {
             try {
                 browser = JSON.parse(pl);
             } catch (e) {}
-            if (typeof browser === 'object'){
+            if (browser !== null && typeof browser === 'object'){
                 $div.find('.browser-container').empty();
                 if(browser.files){
                     browser.files.forEach(function (item, i, plst){
