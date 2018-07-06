@@ -9,6 +9,8 @@
 "use strict";
 
 // add translations for edit mode
+
+
 if (vis.editMode) {
     $.extend(true, systemDictionary, {
         "myColor":          {"en": "myColor",       "de": "Hauptfarbe",  "ru": "Мой цвет"},
@@ -82,7 +84,8 @@ vis.binds.players = {
         oid_track:      {val: '',        role: 'media.track',        winamp: true},
         oid_browser:    {val: '',        role: 'media.browser',      winamp: true},
         oid_add:        {val: '',        role: 'media.add',          winamp: true},
-        oid_clear:      {val: '',        role: 'media.clear',        winamp: true}
+        oid_clear:      {val: '',        role: 'media.clear',        winamp: true},
+		oid_layer:		{vat: '',		 role: 'media.layer',		 winamp: true}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
@@ -354,6 +357,8 @@ vis.binds.players = {
     },
 
     createWidgetWinampBrowser: function (widgetID, view, data, style) {
+		var xml2js = require('xml2js');
+		var parser = new xml2js.Parser({ explicitArray: true });
         var $div = $('#' + widgetID);
         var browser;
         var path = '/';
@@ -368,46 +373,31 @@ vis.binds.players = {
         function updateStates(e, pl){
             var $div = $('#' + widgetID);
             var url;
-            try {
-                browser = JSON.parse(pl);
+			try {
+				parser.parseString(pl, function (err, result) {
+				browser = (result['response']['items'])[0].item;
+				}
             } catch (e) {}
             if (browser !== null && typeof browser === 'object'){
                 $div.find('.browser-container').empty();
-                if(browser.files){
-                    browser.files.forEach(function (item, i, plst){
-                        var obj = browser.files[i];
-                        var text = obj.file;// ' '; //TODO
-                        if (obj.file && ~obj.file.indexOf('/')){
-                            text = obj.file.split('/');
-                            if (text[text.length - 1]){
-                                text = text[text.length - 1];
-                            } else {
-                                text = text[text.length - 2];
-                            }
-                        } else if (obj.file && ~obj.file.indexOf('\\')){
-                            text = obj.file.split('\\');
-                            if (text[text.length - 1]){
-                                text = text[text.length - 1];
-                            } else {
-                                text = text[text.length - 2];
-                            }
-                        }
-                        if (obj.filetype === 'directory'){
+                if(browser.length){
+					for(let i = 0; i < browser.length; i++) {
+						
+						text = browser[i].$.title
+                         
+                        if (browser[i].$.iconid) === '29'){
                             url = 'widgets/players/img/winamp/folder.gif';
-                        } else if (obj.filetype === 'file'){
+                        } else if (browser[i].$.iconid) === '2d'){
                             url = 'widgets/players/img/winamp/audiofile.gif';
                         }
-                        $div.find(".browser-container").append("<li class='item" + (i + 1) + "'><img src='" + url + "' style='width: 16px; height: 16px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
+                        $div.find(".browser-container").append("<li class='item" + (i.toString(16)) + "'><img src='" + url + "' style='width: 16px; height: 16px; vertical-align: middle; margin: 2px;'> " + text + "</li>");
                     });
                 }
             }
             $div.find('.browser-container').on('click', 'li', function(){
-                var n = $(this).index();
-                var folder = browser.files[n].file;
-                console.log('click - ' + folder);
-                path = getPath(folder);
-                current_path = folder;
-                vis.setValue(data.oid_browser, folder);
+                var n = dec2hex($(this).index());
+                console.log('click - ' + ($(this).index()));
+				vis.setValue(data.iod_command, ('NLAI' + (vis.states[data.oid_layer] + '.val') + n + '----');
             });
         }
 
@@ -424,9 +414,21 @@ vis.binds.players = {
             current_path = path;
             path = getPath(path);
         });
-        $div.find('.browser-btn-add').on('click', function (e) {
-            vis.setValue(data.oid_add, current_path);
-        });
+
+		
+		
+
+		function dec2hex(i){
+			var result = "0000";
+			if      (i >= 0    && i <= 15)    { result = "000" + i.toString(16); }
+			else if (i >= 16   && i <= 255)   { result = "00"  + i.toString(16); }
+			else if (i >= 256  && i <= 4095)  { result = "0"   + i.toString(16); }
+			else if (i >= 4096 && i <= 65535) { result =         i.toString(16); }
+			return result
+		}
+
+
+		
 
         function getPath(folders){
             var arr = [];
