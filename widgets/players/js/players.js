@@ -85,7 +85,8 @@ vis.binds.players = {
         oid_browser:    {val: '',        role: 'media.browser',      winamp: true},
         oid_add:        {val: '',        role: 'media.add',          winamp: true},
         oid_clear:      {val: '',        role: 'media.clear',        winamp: true},
-		oid_layer:		{vat: '',		 role: 'media.layer',		 winamp: true}
+		oid_layer:		{val: '',		 role: 'media.layer',		 winamp: true},
+		oid_command:	{val: '',        role: 'media.command',      winamp: true}
     },
     
     createWidgetWinampPlayer: function (widgetID, view, data, style) { //tplWinampPlayer
